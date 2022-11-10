@@ -1,0 +1,7 @@
+<p>Estás visualizando los gastos de {{nombre_billetera}}</p>
+
+<ul>
+{% for gasto in gastos_billetera %}
+<li>{{gasto.descripcion_gasto}} = {{gasto.valor}}</li>
+{% endfor %}
+</ul>

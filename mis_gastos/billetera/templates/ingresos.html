@@ -1,0 +1,7 @@
+<p>Estás visualizando los ingresos de {{nombre_billetera}}</p>
+
+<ul>
+{% for ingreso in ingresos_billetera %}
+<li>{{ingreso.descripcion_ingreso}} = {{ingreso.valor}}</li>
+{% endfor %}
+</ul>
