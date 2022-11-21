@@ -1,0 +1,9 @@
+<body>
+    <h1>Estás en la página para crear ingresos</h1>
+
+    <form method = 'POST'>
+        {% csrf_token %}
+        {{formulario_crear_ingreso}}
+        <button>submit</button>
+    </form>
+</body>

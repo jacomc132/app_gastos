@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Billetera, Ingreso, Gasto
-from .forms import formulario_crear_billetera
+from .forms import formulario_crear_billetera, formulario_crear_ingreso, formulario_crear_gasto
 from django.utils import timezone
 
 
@@ -72,3 +72,30 @@ def crear_billetera(request):
         nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'])
         nueva_billetera.save()
         return redirect('/billetera')
+
+'''
+Vista que recibe la ruta de la billetera (billetera_id) y permite crearle un ingreso.
+'''
+def crear_ingreso(request,ruta_billetera):
+    if request.method == 'GET':
+        return render(request,"crear_ingreso.html",{'formulario_crear_ingreso':formulario_crear_ingreso})
+
+    elif request.method == 'POST':
+        billetera_actual = Billetera.objects.get(pk=ruta_billetera)
+        billetera_actual.ingreso_set.create(descripcion_ingreso=request.POST['descripcion_ingreso'],valor=request.POST['valor'])
+        return redirect(f'/billetera/{ruta_billetera}/ingresos')
+
+
+
+'''
+Vista que recibe la ruta de la billetera (billetera_id) y permite crearle un gasto.
+'''
+def crear_gasto(request,ruta_billetera):
+    if request.method == 'GET':
+        return render(request,"crear_gasto.html",{'formulario_crear_gasto':formulario_crear_gasto})
+
+
+    elif request.method == 'POST':
+        billetera_actual = Billetera.objects.get(pk = ruta_billetera)
+        billetera_actual.gasto_set.create(descripcion_gasto=request.POST['descripcion_gasto'],valor=request.POST['valor'])
+        return redirect(f'/billetera/{ruta_billetera}/gastos')
