@@ -1,0 +1,17 @@
+<nav>
+    <ul>
+        <li><a href="/billetera">mis billeteras</a></li>
+    </ul>
+</nav>
+
+
+<body>
+    <h1>Esta es la página para crear tus nuevas billeteras:</h1>
+    <form method="POST">
+        {% csrf_token %} 
+        {{form}}
+        <button>
+            Save
+        </button>
+    </form>
+</body>
