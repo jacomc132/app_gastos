@@ -1,0 +1,9 @@
+<body>
+    <h1>Estás en la página para crear categorías</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{formulario_crear_categoria}}
+        <button>Submit</button>
+    </form>
+    
+</body>

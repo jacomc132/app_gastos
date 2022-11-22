@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
-from .models import Billetera, Ingreso, Gasto
-from .forms import formulario_crear_billetera, formulario_crear_ingreso, formulario_crear_gasto
+from .models import Billetera, Ingreso, Gasto, Categoria
+from .forms import formulario_crear_billetera, formulario_crear_ingreso, formulario_crear_gasto, formulario_crear_categoria
 from django.utils import timezone
 
 
@@ -21,10 +21,12 @@ def billetera(request):
 '''
 def billetera_actual(request,ruta_billetera):
     billetera = Billetera.objects.get(pk = ruta_billetera)
+    mis_categorias = Categoria.objects.filter(billetera_id=ruta_billetera)
     return render(request,'billetera_actual.html',
     {
         'nombre_billetera':billetera.nombre_billetera,
-        'billetera_pk':billetera.pk
+        'billetera_pk':billetera.pk,
+        'mis_categorias':mis_categorias
         })
 
 
@@ -76,21 +78,21 @@ def crear_billetera(request):
 '''
 Vista que recibe la ruta de la billetera (billetera_id) y permite crearle un ingreso.
 '''
-def crear_ingreso(request,ruta_billetera):
+def crear_ingreso(request,ruta_billetera,categoria_id):
     if request.method == 'GET':
         return render(request,"crear_ingreso.html",{'formulario_crear_ingreso':formulario_crear_ingreso})
 
     elif request.method == 'POST':
         billetera_actual = Billetera.objects.get(pk=ruta_billetera)
         billetera_actual.ingreso_set.create(descripcion_ingreso=request.POST['descripcion_ingreso'],valor=request.POST['valor'])
-        return redirect(f'/billetera/{ruta_billetera}/ingresos')
+        return redirect(f'/billetera/{ruta_billetera}/categorias/{categoria_id}/ingresos')
 
 
 
 '''
 Vista que recibe la ruta de la billetera (billetera_id) y permite crearle un gasto.
 '''
-def crear_gasto(request,ruta_billetera):
+def crear_gasto(request,ruta_billetera,categoria_id):
     if request.method == 'GET':
         return render(request,"crear_gasto.html",{'formulario_crear_gasto':formulario_crear_gasto})
 
@@ -98,4 +100,30 @@ def crear_gasto(request,ruta_billetera):
     elif request.method == 'POST':
         billetera_actual = Billetera.objects.get(pk = ruta_billetera)
         billetera_actual.gasto_set.create(descripcion_gasto=request.POST['descripcion_gasto'],valor=request.POST['valor'])
-        return redirect(f'/billetera/{ruta_billetera}/gastos')
+        return redirect(f'/billetera/{ruta_billetera}/categorias/{categoria_id}/gastos')
+    
+
+
+
+def categoria_actual(request,ruta_billetera,categoria_id):
+    mi_billetera = Billetera.objects.get(pk = ruta_billetera)
+    categoria = Categoria.objects.get(pk=categoria_id)
+    return render(request,"categoria_actual.html",
+    {
+        'billetera': mi_billetera,
+        'categoria':categoria
+        })
+
+
+
+
+
+
+def crear_categoria(request,ruta_billetera):
+    if request.method == 'GET':
+        return render(request,"crear_categoria.html",{'formulario_crear_categoria':formulario_crear_categoria})
+    
+    elif request.method == 'POST':
+        billetera = Billetera.objects.get(pk = ruta_billetera)
+        billetera.categoria_set.create(billetera_id=ruta_billetera,nombre_categoria=request.POST['nombre_categoria'])
+        return redirect(f'/billetera/{ruta_billetera}')

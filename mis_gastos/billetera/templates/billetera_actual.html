@@ -6,8 +6,12 @@
 
 
 <h1>{{nombre_billetera}}</h1>
+<a href="{{billetera_pk}}/crear_categoria">Crear categoría</a>
+<h5>Categorias:</h5>
+
 
 <ul>
-    <li><a href="/billetera/{{billetera_pk}}/ingresos">Ingresos</a></li>
-    <li><a href="/billetera/{{billetera_pk}}/gastos">Gastos</a></li>
+    {% for categoria in mis_categorias %}
+        <li><a href="{{billetera_pk}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
+    {% endfor %}
 </ul>
