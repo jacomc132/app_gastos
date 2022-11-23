@@ -2,14 +2,15 @@
     <ul>
         <li><a href="/billetera">mis billeteras</a></li>
         <li><a href="/billetera/{{billetera.pk}}">billetera actual</a></li>
-        <li><a href="/billetera/{{billetera.pk}}/ingresos/crear_ingreso">Crear ingreso</a></li>
+        <li><a href="/billetera/{{billetera.pk}}/{{categoria.pk}}/ingresos/crear_ingreso">Crear ingreso</a></li>
     </ul>
 </nav>
 
 <p>Estás visualizando los ingresos de {{nombre_billetera}}</p>
+<p>Categoría: {{categoria.nombre_categoria}}</p>
 
 <ul>
-{% for ingreso in ingresos_billetera %}
+{% for ingreso in ingresos_categoria %}
 <li>{{ingreso.descripcion_ingreso}} = {{ingreso.valor}}</li>
 {% endfor %}
 </ul>

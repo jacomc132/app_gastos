@@ -1,6 +1,7 @@
 <body>
     <h1>Estás en la página para crear gastos</h1>
-
+    <h2>Categoría: {{categoria.nombre_categoria}}</h2>
+    
     <form method = 'POST'>
         {% csrf_token %}
         {{formulario_crear_gasto}}

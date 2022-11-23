@@ -24,7 +24,7 @@ class Categoria(models.Model):
 
 class Ingreso(models.Model):
     billetera_id = models.ForeignKey(Billetera, on_delete = models.CASCADE)
-    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE,default=1)
+    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     descripcion_ingreso = models.CharField(max_length = 100)
     valor = models.FloatField(default = 0)
     
@@ -37,7 +37,7 @@ class Ingreso(models.Model):
 
 class Gasto(models.Model):
     billetera_id = models.ForeignKey(Billetera, on_delete = models.CASCADE)
-    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE,default=1)
+    categoria_id = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     descripcion_gasto = models.CharField(max_length = 100)
     valor = models.FloatField(default = 0)
 

@@ -2,14 +2,14 @@
     <ul>
         <li><a href="/billetera">mis billeteras</a></li>
         <li><a href="/billetera/{{billetera.pk}}">billetera actual</a></li>
-        <li><a href="/billetera/{{billetera.pk}}/gastos/crear_gasto">Crear gasto</a></li>
+        <li><a href="/billetera/{{billetera.pk}}/{{categoria.pk}}/gastos/crear_gasto">Crear gasto</a></li>
     </ul>
 </nav>
 
 <p>Estás visualizando los gastos de {{nombre_billetera}}</p>
-
+<p>Categoría: {{categoria.nombre_categoria}}</p>
 <ul>
-{% for gasto in gastos_billetera %}
+{% for gasto in gastos_categoria %}
 <li>{{gasto.descripcion_gasto}} = {{gasto.valor}}</li>
 {% endfor %}
 </ul>
