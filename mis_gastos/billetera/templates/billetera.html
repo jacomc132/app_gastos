@@ -1,15 +1,29 @@
-<nav>
-    <ul>
-        <li><a href={% url 'crear_billetera' %}>crear billetera</a></li>
-    </ul>
-</nav>
-
-
-<h1>Mis billeteras:</h1>
-<ul>
-{% for billetera in mis_billeteras %}
-
-    <li><a href="/billetera/{{billetera.id}}">{{billetera}}</a></li>
-
-{% endfor %}
-</ul>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <title>billetera</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li id="crear"><a href={% url 'crear_billetera' %}>crear billetera</a></li>
+        </ul>
+    </nav>
+    
+    <div class="contenido">
+        <h1 class="titulo">Mis billeteras:</h1>
+        <ul>
+        {% for billetera in mis_billeteras %}
+        
+            <li class="elemento_lista_container"><a href="/billetera/{{billetera.id}}">~ {{billetera}}</a></li>
+        
+        {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

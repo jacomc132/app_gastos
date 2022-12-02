@@ -1,17 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <title>ingresos</title>
+</head>
 <body>
-    <ul>
-        <li>
-            <a href="/billetera">mis billeteras</a>
-        </li>
-        </li>
-            <a href="/billetera/{{billetera.pk}}">Anterior</a>
-        </li>
-    </ul>
-    <h1>{{billetera.nombre_billetera}}</h1>
-    <h2>Estás en la categoría {{categoria.nombre_categoria}}</h2>
 
-    <ul>
-        <li><a href="/billetera/{{billetera.pk}}/{{categoria.pk}}/ingresos">Ingresos</a></li>
-        <li><a href="/billetera/{{billetera.pk}}/{{categoria.pk}}/gastos">Gastos</a></li>
+<nav class='navbar'>
+    <ul class='nav_container'>
+        <li class="li1"><a href="/billetera">mis billeteras</a></li>
+        <li class="li2"><a href="/billetera/{{billetera.pk}}">billetera actual</a></li>
+        <li class="li3" id="crear"><a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}/crear_ingreso_gasto">Crear {{categoria.tipo_categoria}}</a></li>
     </ul>
+</nav>
+
+<div class="contenido">
+    <h2>Categoría: {{categoria.nombre_categoria}}</h2>
+    {% if tipo_categoria == 'ingresos' %}
+    <img class="imagen_gasto_ingreso"src="{% static 'imagen2ingresos.png' %}" alt="imagen_ingresos">
+    {% elif tipo_categoria == 'gastos' %}
+    <img class="imagen_gasto_ingreso"src="{% static 'imagen_gastos.png' %}" alt="imagen_gastos">
+    {% endif %}
+    <div class="divisor">
+        
+    </div>
+    <h3 class="subtitulo">{{categoria.tipo_categoria}} de {{billetera.nombre_billetera}}</h3>
+    <table>
+        <tr class="titulos_campos">
+            <td>id</td>
+            <td>descripción</td>
+            <td>valor</td>
+        </tr>
+        {% for i in ingresos_o_gastos %}
+        <tr>
+            <td>{{i.pk}}</td>
+            <td>{{i.descripcion}}</td>
+            <td>{{i.valor}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+
 </body>
+</html>

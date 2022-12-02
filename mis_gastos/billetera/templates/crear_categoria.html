@@ -1,5 +1,6 @@
 <body>
-    <h1>Estás en la página para crear categorías</h1>
+    <h1>Billetera {{billetera.nombre_billetera}}</h1>
+    <h3>Estás en la página para crear categorías de {{tipo_categoria}}</h3>
     <form method="POST">
         {% csrf_token %}
         {{formulario_crear_categoria}}

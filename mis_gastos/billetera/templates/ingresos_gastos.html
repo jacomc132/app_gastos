@@ -1,0 +1,25 @@
+<body>
+<nav>
+    <ul>
+        <li>
+            <a href="/billetera">mis billeteras</a>
+        </li>
+        </li>
+            <a href="/billetera/{{billetera.pk}}">billetera_actual</a>
+        </li>
+        </li>
+            <a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/crear_categoria">crear categoria</a>
+        </li>
+    </ul>
+</nav>
+
+    <h1> billetera {{billetera.nombre_billetera}}</h1>
+    <h2>Mis categorías de {{tipo_categoria}}</h2>
+
+    
+    <ul>
+        {% for categoria in categorias %}
+            <li><a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
+        {% endfor %}
+    </ul>
+</body>

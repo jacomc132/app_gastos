@@ -1,17 +1,27 @@
-<nav>
-    <ul>
-        <li><a href="/billetera">mis billeteras</a></li>
-    </ul>
-</nav>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= "{% static '/styles/main.css' %}">
+    <title>billetera_actual</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li id="crear"><a href="/billetera">mis billeteras</a></li>
+        </ul>
+    </nav>
+    
+    
+    <div class="contenido">
+        <h1 class="titulo">{{nombre_billetera}}</h1>
+        <p>Tu saldo disponible es: {{billetera.total_dinero}}</p>
+        <a href="{{billetera_pk}}/ingresos">Visualizar ingresos</a>
+        <a href="{{billetera_pk}}/gastos">Visualizar gastos</a>
+    </div>
+</body>
+</html>
 
-
-<h1>{{nombre_billetera}}</h1>
-<a href="{{billetera_pk}}/crear_categoria">Crear categoría</a>
-<h5>Categorias:</h5>
-
-
-<ul>
-    {% for categoria in mis_categorias %}
-        <li><a href="{{billetera_pk}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
-    {% endfor %}
-</ul>
