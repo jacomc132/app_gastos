@@ -2,8 +2,8 @@ from django import forms
 from .models import Billetera
 
 class formulario_crear_billetera(forms.Form):
-    nombre_billetera = forms.CharField(max_length=40,label='Nombre billetera')
-    total_dinero = forms.IntegerField(label='cantidad dinero',max_value=100000000)
+    nombre_billetera = forms.CharField(max_length=40,label='Nombre billetera', widget=forms.TextInput(attrs={'class':'input1'}))
+    total_dinero = forms.IntegerField(label='cantidad dinero',max_value=100000000, widget=forms.TextInput(attrs={'class':'input2'}))
 
 
 class formulario_crear_ingreso_gasto(forms.Form):

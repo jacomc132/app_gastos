@@ -15,12 +15,12 @@
         </ul>
     </nav>
     
-    <div class="contenido">
-        <h1 class="titulo">Mis billeteras:</h1>
+    <div class="contenido" id="contenedor_billeteras">
+        <h1 id="titulo_billeteras">Mis billeteras:</h1>
         <ul>
         {% for billetera in mis_billeteras %}
         
-            <li class="elemento_lista_container"><a href="/billetera/{{billetera.id}}">~ {{billetera}}</a></li>
+            <li class="elemento_lista_container" id="nombre_billetera"><a href="/billetera/{{billetera.id}}">~ {{billetera}}</a></li>
         
         {% endfor %}
         </ul>

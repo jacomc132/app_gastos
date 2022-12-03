@@ -135,3 +135,77 @@ table{
 .elemento_lista_container a:hover{
     color:var(--color3);
 }
+
+#contenedor_billeteras{
+    width:500px;
+    height:100vh;
+    border-color:var(--color1);
+    border-style:solid;
+    border-radius:50px;
+    border-width: 5px;
+}
+
+#titulo_billeteras{
+    padding-left:100px;
+}
+
+#nombre_billetera{
+    padding-left:30px;
+}
+
+p{
+    font-size: large;
+    font-weight: 800;
+}
+
+label{
+    font-size: large;
+    font-weight: 800;
+}
+
+button{
+    color:var(--color2);
+    background-color:var(--color1);
+    border-style:solid;
+    border-width: 1px;
+    height: 40px;
+    width: 80px;
+    border-radius:10px;
+}
+
+button:hover{
+    color:var(--color1);
+    background-color:var(--color4);
+}
+
+#titulo_crear_billetera{
+    padding-left:100px;
+    padding-bottom: 50px;
+}
+
+input{
+    width:200px;
+    height:28px;
+    border-radius:100px;
+    border-style: solid;
+}
+
+.input1{
+    grid-column: 2/3;
+    grid-row:2/3;
+}
+
+.input2{
+    grid-column: 2/3;
+    grid-row:4/5;
+}
+
+.input3{
+    grid-column: 2/3;
+    grid-row:6/7;
+}
+
+.input4{
+    grid-column: 2/3;
+    grid-row:8/9;
+}
