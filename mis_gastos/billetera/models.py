@@ -30,7 +30,7 @@ class Ingreso(models.Model):
     
 
     def __str__(self):
-        return self.descripcion_ingreso
+        return self.descripcion
 
 
 
@@ -43,7 +43,7 @@ class Gasto(models.Model):
 
 
     def __str__(self):
-        return self.descripcion_gasto
+        return self.descripcion
 
 
 

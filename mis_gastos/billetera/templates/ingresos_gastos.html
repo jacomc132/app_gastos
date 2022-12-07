@@ -1,25 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <title>ingresos_gastos</title>
+</head>
 <body>
-<nav>
-    <ul>
-        <li>
-            <a href="/billetera">mis billeteras</a>
-        </li>
-        </li>
-            <a href="/billetera/{{billetera.pk}}">billetera_actual</a>
-        </li>
-        </li>
-            <a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/crear_categoria">crear categoria</a>
-        </li>
-    </ul>
-</nav>
-
-    <h1> billetera {{billetera.nombre_billetera}}</h1>
-    <h2>Mis categorías de {{tipo_categoria}}</h2>
-
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li class="li1">
+                <a href="/billetera">Billeteras</a>
+            </li>
+            <li class="li2">
+                <a href="/billetera/{{billetera.pk}}">Billetera actual</a>
+            </li>
+            <li class="crear">
+                <a target="_blank" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/crear_categoria">Crear categoría</a>
+            </li>
+        </ul>
+    </nav>
     
-    <ul>
-        {% for categoria in categorias %}
-            <li><a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
-        {% endfor %}
-    </ul>
+    <div class="contenido" id="contenedor_categorias">
+        <h1 id="titulo_mis_categorias">Billetera {{billetera.nombre_billetera}}</h1>
+        <h2 id="subtitulo_mis_categorias">Mis categorías de {{tipo_categoria}}...</h2>
+    
+        
+        <ul>
+            {% for categoria in categorias %}
+                <li class="contenedor_elemento_categoria"><a class="elemento_categoria" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
+</html>
+

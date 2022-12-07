@@ -122,10 +122,14 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
 
         if categoria_type == 'ingresos':
             billetera.ingreso_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
+            billetera.total_dinero = billetera.total_dinero + float(request.POST['valor'])
+            billetera.save()
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
         elif categoria_type == 'gastos':
             billetera.gasto_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
+            billetera.total_dinero = billetera.total_dinero - float(request.POST['valor'])
+            billetera.save()
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
     

@@ -1,10 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <title>crear_ingreso_gasto</title>
+</head>
 <body>
-    <h1>Estás en la página para crear {{categoria.tipo_categoria}}</h1>
-    <h2>Categoría: {{categoria.nombre_categoria}}</h2>
-
-    <form method = 'POST'>
-        {% csrf_token %}
-        {{formulario_crear_ingreso_gasto}}
-        <button>submit</button>
-    </form>
+    <div class="contenido">
+        <h1 id="titulo_crear_ingreso">Estás en la página para crear {{categoria.tipo_categoria}}</h1>
+        <h2 id="subtitulo_crear_ingreso">Categoría: {{categoria.nombre_categoria}}</h2>
+    
+        <form method = 'POST'>
+            {% csrf_token %}
+            {{formulario_crear_ingreso_gasto}}
+            <button>submit</button>
+        </form>
+    </div>
 </body>
+</html>

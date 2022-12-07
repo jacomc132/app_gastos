@@ -88,6 +88,7 @@ body{
     margin-left:265px;
     width:70px;
     height:70px;
+
 }
 
 .subtitulo{
@@ -112,7 +113,7 @@ table{
     background-color: var(--color1);
 }
 
-#crear{
+.crear{
     grid-column:8/9;
     grid-row: 2/3;
 }
@@ -208,4 +209,96 @@ input{
 .input4{
     grid-column: 2/3;
     grid-row:8/9;
+}
+
+#link_ingresos{
+    display:inline-flex;
+    justify-content: center;
+    width:90px;
+    height:30px;
+    border-color:var(--color1);
+    border-radius:5px;
+    border-style: solid;
+    text-decoration: none;
+    color:var(--color1);
+    background-color: var(--color1);
+    font-size: large;
+    color:var(--color4);
+}
+
+#link_gastos{
+    display:inline-flex;
+    justify-content:center;
+    margin-left: 50px;
+    width:90px;
+    height:30px;
+    border-color:var(--color1);
+    border-radius:5px;
+    border-style: solid;
+    text-decoration: none;
+    background-color: var(--color1);
+    font-size:large ;
+    color:var(--color4);
+}
+
+#link_gastos:hover{
+    background-color: var(--color4);
+    color:var(--color1);
+}
+
+#link_ingresos:hover{
+    background-color: var(--color4);
+    color:var(--color1);
+}
+
+#titulo_mis_categorias{
+    padding-left:100px;
+    color:var(--color1);
+    font-size: x-large;
+}
+
+#subtitulo_mis_categorias{
+    padding-left:110px;
+    color:var(--color1);
+    font-size: medium;
+}
+
+#contenedor_categorias{
+    width:500px;
+    height:100vh;
+    border-color:var(--color1);
+    border-style:solid;
+    border-radius:50px;
+    border-width: 5px;
+}
+
+.contenedor_elemento_categoria{
+    list-style: circle;
+}
+.elemento_categoria{
+    text-decoration:none;
+    color:var(--color1);
+    font-size:medium;
+    font-weight:700;
+    color:var(--color1);
+}
+
+.elemento_categoria:hover{
+    text-decoration:none;
+    color:var(--color3);
+    font-size:medium;
+    font-weight:700;
+}
+
+#titulo_crear_ingreso{
+    padding-left: 10px;
+}
+
+#subtitulo_crear_ingreso{
+    padding-left: 110px;
+}
+
+#contenedor_categoria_actual{
+    display:grid;
+    grid-template-rows:1fr 1fr 1fr 1fr;
 }

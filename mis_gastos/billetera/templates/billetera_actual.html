@@ -11,16 +11,16 @@
 <body>
     <nav class="navbar">
         <ul class="nav_container">
-            <li class="li1"><a href="/billetera">mis billeteras</a></li>
+            <li class="li1"><a href="/billetera">Billeteras</a></li>
         </ul>
     </nav>
     
     
     <div class="contenido">
         <h1 class="titulo">{{nombre_billetera}}</h1>
-        <p>Tu saldo disponible es: ${{billetera.total_dinero}}</p>
-        <a href="{{billetera_pk}}/ingresos">Visualizar ingresos</a>
-        <a href="{{billetera_pk}}/gastos">Visualizar gastos</a>
+        <p>~ Tu saldo disponible es: ${{billetera.total_dinero}}</p>
+        <a id="link_ingresos" href="{{billetera_pk}}/ingresos">Ingresos</a>
+        <a id="link_gastos" href="{{billetera_pk}}/gastos">Gastos</a>
     </div>
 </body>
 </html>
