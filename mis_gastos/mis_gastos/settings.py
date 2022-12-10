@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'billetera.apps.BilleteraConfig',
+    'ahorros.apps.AhorrosConfig',
 ]
 
 MIDDLEWARE = [

@@ -5,6 +5,7 @@
     --color4:#ffffff;
     --color5:black;
     --color6: white;
+    --color7: #A72AAB;
 }
 
 body{
@@ -170,7 +171,7 @@ button{
     border-style:solid;
     border-width: 1px;
     height: 40px;
-    width: 80px;
+    width: 70px;
     border-radius:10px;
 }
 
@@ -260,7 +261,9 @@ input{
 #subtitulo_mis_categorias{
     padding-left:110px;
     color:var(--color1);
-    font-size: medium;
+    font-size: large;
+    font-weight: 700;
+    color:var(--color7);
 }
 
 #contenedor_categorias{
@@ -301,4 +304,50 @@ input{
 #contenedor_categoria_actual{
     display:grid;
     grid-template-rows:1fr 1fr 1fr 1fr;
+}
+
+/* Estilos para formularios: */
+form{
+    padding-left:50px;
+    width:600px;
+    display:grid;
+    grid-template-rows:repeat(5,1fr);
+    grid-template-columns: repeat(2,1fr); 
+}
+
+
+.form_input1{
+    grid-column:2/3;
+    grid-row:1/2;
+}
+
+
+.form_input2{
+    grid-column:2/3;
+    grid-row:2/3;
+}
+
+
+.form_input3{
+    grid-column:2/3;
+    grid-row:3/4;
+}
+
+
+.form_input4{
+    grid-column:2/3;
+    grid-row:4/5;
+}
+
+select{
+    width:210px;
+    height:30px;
+    border-radius:100px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+#boton_crear_billetera{
+    margin-left:200px;
+    margin-top:10px;
 }

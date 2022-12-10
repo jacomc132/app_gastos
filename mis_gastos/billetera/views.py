@@ -25,7 +25,7 @@ def crear_billetera(request):
     elif request.method == 'POST':
         #Método POST (Postear info en base de datos)
         fecha_actual = timezone.now()
-        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'])
+        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=request.POST['ahorro_id'] )
         nueva_billetera.save()
         return redirect('/billetera')
 
