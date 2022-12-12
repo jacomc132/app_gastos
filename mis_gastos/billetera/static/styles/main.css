@@ -190,6 +190,7 @@ input{
     height:28px;
     border-radius:100px;
     border-style: solid;
+    border-color:var(--color1);
 }
 
 .input1{
@@ -350,4 +351,27 @@ select{
 #boton_crear_billetera{
     margin-left:200px;
     margin-top:10px;
+}
+
+
+.link_pagina_actual{
+    display:flex;
+    justify-content: center;
+    height:30px;
+    width:70px;
+    border-style:solid;
+    border-color:var(--color4);
+    border-width: 2px;
+    background-color:var(--color);
+}
+
+
+.link_pagina_actual:hover{
+    display:flex;
+    justify-content: center;
+    height:30px;
+    width:70px;
+    border-style:solid;
+    border-color:var(--color3);
+    border-width: 2px;
 }

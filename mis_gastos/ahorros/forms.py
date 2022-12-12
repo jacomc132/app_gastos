@@ -9,8 +9,9 @@ class formulario_crear_ahorro(forms.Form):
 
 
 class formulario_crear_inversion(forms.Form):
+    CHOICES = (("1","Activo"),("2","Pasivo"))
     nombre_inversion = forms.CharField(max_length=60, label="Nombre inversión")
     ahorro_id = forms.ModelChoiceField(Ahorro.objects.all(), label="Ahorro asociado")
-    tipo_inversion = forms.Select(choices=("Activo","Pasivo"))
+    tipo_inversion = forms.ChoiceField(widget=forms.Select, choices=CHOICES, label="Tipo de inversión")
     valor_inversion = forms.FloatField(label="Valor inversión")
 

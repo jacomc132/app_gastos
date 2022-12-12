@@ -1,12 +1,36 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= "{% static '/styles/estilos_ahorros.css' %}">
     <title>ahorro_actual</title>
 </head>
 <body>
-    <h1>Estás en la vista de ahorro actual...</h1>
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li class="li1"><a href="/ahorros">Ahorros</a></li>
+            <li class="li2"><a href="/billetera">Billeteras</a></li>
+            <li class="crear"><a href="/ahorros/{{ahorro.pk}}/crear_inversion">Crear inversión</a></li>
+        </ul>
+    </nav>
+    
+    
+    <div class="contenido">
+        <h1 class="titulo">{{ahorro.nombre_ahorro}}</h1>
+        <p>~ Monto: ${{ahorro.cantidad_dinero}}</p>
+        <div class="contenedor_billeteras_asociadas">
+            <h2 id="subtitulo_billeteras_asociadas">Billeteras asociadas:</h2>
+            <ul>
+                {% for billetera in billeteras_ahorro %}
+                    <li id="billetera_ahorro_actual"><a id="link_billetera_ahorro_actual"href="/billetera/{{billetera.pk}}">▹{{billetera.nombre_billetera}}</class=a></li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        
+    </div>
 </body>
 </html>

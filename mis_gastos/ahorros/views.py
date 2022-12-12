@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .forms import formulario_crear_ahorro, formulario_crear_inversion
 from .models import Ahorro,Inversion
 from django.utils import timezone
+from billetera.models import Billetera,Ingreso, Gasto
 
 # Create your views here.
 def ahorros(request):
@@ -19,12 +20,15 @@ def crear_ahorro(request):
     elif request.method == 'POST':
         fecha_actual=timezone.now()
         nuevo_ahorro = Ahorro(nombre_ahorro=request.POST['nombre_ahorro'],fecha_creacion=fecha_actual,cantidad_dinero=request.POST['cantidad_dinero'])
+        nuevo_ahorro.save()
         return redirect('/ahorros')
 
 
 
 def ahorro_actual(request,id_ahorro):
-    return render(request,'ahorro_actual.html')
+    ahorro = Ahorro.objects.get(pk=id_ahorro)
+    billeteras_ahorro = Billetera.objects.filter(ahorro_id=id_ahorro)
+    return render(request,'ahorro_actual.html',{'ahorro':ahorro,'billeteras_ahorro':billeteras_ahorro})
 
 
 

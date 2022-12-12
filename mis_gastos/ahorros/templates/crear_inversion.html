@@ -1,12 +1,23 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/estilos_ahorros.css' %}">
     <title>crear_inversion</title>
 </head>
 <body>
-    <h1>Estás en la página para crear inversiones</h1>
+
+    <div class="contenido" id="formulario_crear_inversion">
+        <h1 id="titulo_crear_inversion">Crea tu inversión...</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{formulario_crear_inversion}}
+            <button class="boton_crear">save</button>
+        </form>
+    </div>
+
 </body>
 </html>

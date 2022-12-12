@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse, JsonResponse
 from .models import Billetera, Ingreso, Gasto, Categoria
+from ahorros.models import Ahorro,Inversion
 from .forms import formulario_crear_billetera,formulario_crear_ingreso_gasto,formulario_crear_categoria
 from django.utils import timezone
 
@@ -25,7 +26,8 @@ def crear_billetera(request):
     elif request.method == 'POST':
         #Método POST (Postear info en base de datos)
         fecha_actual = timezone.now()
-        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=request.POST['ahorro_id'] )
+        ahorro_seleccionado=request.POST['ahorro_id']
+        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=Ahorro.objects.get(pk=ahorro_seleccionado))
         nueva_billetera.save()
         return redirect('/billetera')
 
