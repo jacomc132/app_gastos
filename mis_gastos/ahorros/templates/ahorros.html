@@ -23,7 +23,7 @@
 
         <ul class="coin">
         {% for ahorro in ahorros %}
-            <li class="contenedor_elemento_categoria"><a href="/ahorros/{{ahorro.pk}}">{{ahorro.nombre_ahorro}}</a></li>
+            <li class="contenedor_elemento_categoria"><a id="link_ahorro"href="/ahorros/{{ahorro.pk}}">{{ahorro.nombre_ahorro}}</a></li>
         {% endfor %}
         </ul>
     </div>

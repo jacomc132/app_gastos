@@ -7,7 +7,7 @@ class Billetera(models.Model):
     nombre_billetera = models.CharField(max_length = 40)
     fecha_creacion = models.DateTimeField("date published")
     total_dinero = models.FloatField(default = 0)
-    ahorro_id = models.ForeignKey(Ahorro, on_delete=models.CASCADE, default=1)
+    ahorro_id = models.ForeignKey(Ahorro, on_delete=models.CASCADE, default=6)
 
     def __str__(self):
         return self.nombre_billetera

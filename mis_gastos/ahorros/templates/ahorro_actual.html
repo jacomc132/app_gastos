@@ -17,17 +17,42 @@
         </ul>
     </nav>
     
-    
-    <div class="contenido">
-        <h1 class="titulo">{{ahorro.nombre_ahorro}}</h1>
-        <p>~ Monto: ${{ahorro.cantidad_dinero}}</p>
-        <div class="contenedor_billeteras_asociadas">
-            <h2 id="subtitulo_billeteras_asociadas">Billeteras asociadas:</h2>
-            <ul>
-                {% for billetera in billeteras_ahorro %}
-                    <li id="billetera_ahorro_actual"><a id="link_billetera_ahorro_actual"href="/billetera/{{billetera.pk}}">▹{{billetera.nombre_billetera}}</class=a></li>
+    <h1 id="titulo_ahorro_actual">{{ahorro.nombre_ahorro}}</h1>
+    <div id="contenido_ahorro_actual">
+        <div id="contenedor_info_ahorro">
+            <h2 id="monto">Monto: ${{ahorro.cantidad_dinero}}</h2>
+            <h4 id="asociadas_subtitulo">Billeteras asociadas:</h4>
+
+            {% if billeteras_ahorro %}
+                <ul>
+                    {% for billetera in billeteras_ahorro %}
+                        <li id="contenedor_billetera_asociada"><a id="link_billetera_asociada" href="/billetera/{{billetera.pk}}">▹{{billetera.nombre_billetera}}</class=a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div id="contenedor_sin_billeteras">
+                    <a href="/billetera/crear_billetera" id="sin_billeteras2">Sin billeteras. Créalas aquí...</a>
+                </div>
+            {% endif %}
+        </div>
+        <div id="contenedor_tabla_inversiones">
+            <table>
+                <tr id="contenedor_titulo_inversiones">
+                    <p id="titulo_inversiones">Inversiones</p>
+                </tr>
+                <tr class="titulos_campos">
+                    <td>Nombre inversión</td>
+                    <td>Tipo inversión</td>
+                    <td>Valor inversión</td>
+                </tr>
+                {% for inversion in inversiones_ahorro %}
+                <tr>
+                    <td>{{inversion.nombre_inversion}}</td>
+                    <td>{{inversion.tipo_inversion}}</td>
+                    <td>{{inversion.valor_inversion}}</td>
+                </tr>
                 {% endfor %}
-            </ul>
+            </table>
         </div>
 
         

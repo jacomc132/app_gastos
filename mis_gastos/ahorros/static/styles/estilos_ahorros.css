@@ -1,6 +1,6 @@
 :root{
-    --color1:#2c5d63;
-    --color2: #a2c11c;
+    --color1:#35bcbf;
+    --color2: #90f6d7;
     --color3: #283739;
     --color4:#ffffff;
     --color5:black;
@@ -170,6 +170,7 @@ button{
     background-color:var(--color1);
     border-style:solid;
     border-width: 1px;
+    border-color:var(--color1);
     height: 40px;
     width: 70px;
     border-radius:10px;
@@ -419,7 +420,7 @@ select{
     border-radius:40px;
     border-color:var(--color1);
     width:40vw;
-    height: 80vh;
+    height:10vh;
 }
 
 #subtitulo_billeteras_asociadas{
@@ -446,3 +447,130 @@ select{
     color:var(--color7);
 }
 
+#link_ahorro{
+    text-decoration:none;
+    color:var(--color3);
+    font-weight: 1000;
+    font-size:large;
+}
+
+#link_ahorro:hover{
+    text-decoration:none;
+    color:var(--color7);
+}
+
+
+/* Estilos específicos para ahorro_actual.html: */
+
+#titulo_ahorro_actual{
+    padding-left:350px;
+    font-family:'Courier New', Courier, monospace;
+    color:var(--color5);
+}
+
+#contenido_ahorro_actual{
+    font-family:'Courier New', Courier, monospace;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+#contenedor_info_ahorro{
+    width: 20vw;
+    height: 80vh;
+    border-style:solid;
+    border-color:var(--color1);
+    border-radius:10px;
+    display:inline-block;
+    justify-self:center;
+    
+
+}
+
+#contenedor_tabla_inversiones{
+    width: 60vw;
+    padding:0px;
+    border:0px;
+    display: block;
+    color:var(--color5);
+}
+
+#contenedor_tabla_inversiones:hover{
+    width: 60vw;
+    padding:0px;
+    border:0px;
+    display: block;
+    color:var(--color5);
+}
+
+#monto{
+    margin-top: 15px;
+    color:var(--color7);
+    margin-left:20px;
+}
+
+#asociadas_subtitulo{
+    margin-left:10px;
+
+}
+
+#contenedor_billetera_asociada{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    font-size:small;
+}
+
+#link_billetera_asociada{
+    text-decoration:none;
+    color:var(--color3);
+    font-weight: 1000;
+    font-size:large;
+    padding:0px;
+    margin:0px;
+}
+
+
+#link_billetera_asociada:hover{
+    text-decoration:none;
+    color:var(--color7);
+}
+
+#sin_billeteras_asociadas{
+    margin-left:10px;
+
+}
+
+#titulo_inversiones{
+    border-color: var(--color3);
+    border-radius: 10px;
+    grid-column:2/3;
+    margin-left:220px;
+    color:var(--color7);
+}
+
+.filas_tablas{
+    color:var(--color5);
+}
+
+#sin_billeteras{
+    margin:0px;
+    font-size:small;
+    margin-left:23px;
+    color:black;
+}
+
+#sin_billeteras2{
+    margin:0px;
+    font-size:small;
+    margin-left:10px;
+    color:var(--color5);
+    text-decoration:none;
+    font-weight: 900;
+}
+
+#sin_billeteras2:hover{
+    font-size:medium;
+    margin-left:10px;
+    color:var(--color7);
+    text-decoration:none;
+}

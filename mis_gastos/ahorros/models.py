@@ -7,8 +7,10 @@ class Ahorro(models.Model):
     fecha_creacion = models.DateTimeField("date published")
     cantidad_dinero = models.FloatField(default = 0)
 
+
     def __str__(self):
         return self.nombre_ahorro
+    
 
 
 

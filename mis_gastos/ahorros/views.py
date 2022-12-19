@@ -28,14 +28,18 @@ def crear_ahorro(request):
 def ahorro_actual(request,id_ahorro):
     ahorro = Ahorro.objects.get(pk=id_ahorro)
     billeteras_ahorro = Billetera.objects.filter(ahorro_id=id_ahorro)
-    return render(request,'ahorro_actual.html',{'ahorro':ahorro,'billeteras_ahorro':billeteras_ahorro})
+    inversiones_ahorro = Inversion.objects.filter(ahorro_id=id_ahorro)
+    return render(request,'ahorro_actual.html',{'ahorro':ahorro,'billeteras_ahorro':billeteras_ahorro,'inversiones_ahorro':inversiones_ahorro})
 
 
 
 def crear_inversion(request,id_ahorro):
-    
     if request.method == 'GET':
         return render(request,'crear_inversion.html',{'formulario_crear_inversion':formulario_crear_inversion})
     
     elif request.method == 'POST':
+        ahorro_seleccionado = Ahorro.objects.get(pk=id_ahorro)
+        nueva_inversion = Inversion(nombre_inversion=request.POST['nombre_inversion'],ahorro_id= ahorro_seleccionado,tipo_inversion=request.POST['tipo_inversion'],valor_inversion=request.POST['valor_inversion'])
+        nueva_inversion.save()
+        ahorro_seleccionado.cantidad_dinero = ahorro_seleccionado.cantidad_dinero - nueva_inversion.valor_inversion
         return redirect(f'/ahorros/{id_ahorro}')

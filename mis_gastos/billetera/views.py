@@ -29,6 +29,9 @@ def crear_billetera(request):
         ahorro_seleccionado=request.POST['ahorro_id']
         nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=Ahorro.objects.get(pk=ahorro_seleccionado))
         nueva_billetera.save()
+        ahorro = Ahorro.objects.get(pk=ahorro_seleccionado)
+        ahorro.cantidad_dinero = ahorro.cantidad_dinero + float(request.POST['total_dinero'])
+        ahorro.save()
         return redirect('/billetera')
 
 
@@ -99,6 +102,7 @@ def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
             'tipo_categoria':tipo_categoria,
             'ingresos_o_gastos':ingresos
             })
+
     elif categoria_type == 'gastos':
         gastos = Gasto.objects.filter(categoria_id = categoria_id)
         gastos = gastos.filter(billetera_id=ruta_billetera)
@@ -114,6 +118,9 @@ def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
 
 '''
 def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    ahorro_asociado = Ahorro.objects.get(nombre_ahorro=billetera.ahorro_id)
+
     if request.method == 'GET':
         categoria = Categoria.objects.get(pk=categoria_id)
         return render(request,"crear_ingreso_gasto.html",{'formulario_crear_ingreso_gasto':formulario_crear_ingreso_gasto,'categoria':categoria})
@@ -126,12 +133,16 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
             billetera.ingreso_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
             billetera.total_dinero = billetera.total_dinero + float(request.POST['valor'])
             billetera.save()
+            ahorro_asociado.cantidad_dinero = ahorro_asociado.cantidad_dinero + float(request.POST['valor'])
+            ahorro_asociado.save()
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
         elif categoria_type == 'gastos':
             billetera.gasto_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
             billetera.total_dinero = billetera.total_dinero - float(request.POST['valor'])
             billetera.save()
+            ahorro_asociado.cantidad_dinero = ahorro_asociado.cantidad_dinero - float(request.POST['valor'])
+            ahorro_asociado.save()
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
     
