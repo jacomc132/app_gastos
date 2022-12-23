@@ -375,3 +375,55 @@ select{
     border-color:var(--color3);
     border-width: 2px;
 }
+
+.contenedor_billeteras{
+    display:grid;
+    grid-template-columns:60% 5% 5%;
+}
+
+.contenedor_elementos{
+    grid-column:1/2;
+}
+
+.eliminar_billetera{
+    text-decoration:none;
+    grid-column:2/3;
+}
+
+.modificar_billetera{
+    text-decoration:none;
+    grid-column:3/4;
+}
+
+.categorias_container{
+    display:grid;
+    grid-template-columns:60% 5% 5%;
+}
+
+.eliminar_categoria{
+    text-decoration:none;
+    grid-column:2/3;
+}
+
+.modificar_categoria{
+    text-decoration:none;
+    grid-column:3/4;
+}
+
+.contenedor_eliminar_ingreso_gasto{
+    border-style:none;
+    width:20px;
+
+}
+
+.contenedor_modificar_ingreso_gasto{
+    border-style:none;
+}
+
+.eliminar_ingreso_gasto{
+    text-decoration:none;
+}
+
+.modificar_ingreso_gasto{
+    text-decoration:none;
+}

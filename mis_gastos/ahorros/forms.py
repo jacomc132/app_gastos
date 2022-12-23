@@ -13,4 +13,5 @@ class formulario_crear_inversion(forms.Form):
     nombre_inversion = forms.CharField(max_length=60, label="Nombre inversión")
     tipo_inversion = forms.ChoiceField(widget=forms.Select, choices=CHOICES, label="Tipo de inversión")
     valor_inversion = forms.FloatField(label="Valor inversión")
+    ROI = forms.IntegerField(label="ROI",max_value=100)
 

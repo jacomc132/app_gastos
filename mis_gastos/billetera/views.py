@@ -119,7 +119,7 @@ def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
 '''
 def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
-    ahorro_asociado = Ahorro.objects.get(nombre_ahorro=billetera.ahorro_id)
+    ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
 
     if request.method == 'GET':
         categoria = Categoria.objects.get(pk=categoria_id)
@@ -145,6 +145,63 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
             ahorro_asociado.save()
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
+    
+
+def eliminar_billetera(request,ruta_billetera):
+    billetera=Billetera.objects.get(pk=ruta_billetera)
+    billetera.delete()
+    return redirect(f"/billetera")
+
+
+
+
+def eliminar_categoria(request,ruta_billetera,categoria_type,categoria_id):
+    categoria=Categoria.objects.get(pk=categoria_id)
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    ahorro = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+
+    if categoria_type == "ingresos":
+        ingresos = Ingreso.objects.filter(categoria_id=categoria_id)
+        for ingreso in ingresos:
+            billetera.total_dinero = float(billetera.total_dinero) - float(ingreso.valor)
+            billetera.save()
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) - float(ingreso.valor)
+            ahorro.save()
+
+    elif categoria_type == "gastos":
+        gastos = Gasto.objects.filter(categoria_id=categoria_id)
+        for gasto in gastos:
+            billetera.total_dinero = float(billetera.total_dinero) + float(gasto.valor)
+            billetera.save()
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) + float(gasto.valor)
+            ahorro.save()
+
+    categoria.delete()
+    return redirect(f"/billetera/{ruta_billetera}/{categoria_type}")
+
+
+
+
+def eliminar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,ingreso_gasto_id):
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    ahorro = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+    if categoria_type == "ingresos":
+        ingreso = Ingreso.objects.get(pk=ingreso_gasto_id)
+        billetera.total_dinero = float(billetera.total_dinero) - float(ingreso.valor)
+        billetera.save()
+        ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) - float(ingreso.valor)
+        ahorro.save()
+        ingreso.delete()
+        return redirect(f"/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}")
+    
+    elif categoria_type == "gastos":
+        gasto = Gasto.objects.get(pk=ingreso_gasto_id)
+        billetera.total_dinero = float(billetera.total_dinero) + float(gasto.valor)
+        billetera.save()
+        ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) + float(gasto.valor) 
+        ahorro.save()
+        gasto.delete()
+        return redirect(f"/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}")
     
 
 

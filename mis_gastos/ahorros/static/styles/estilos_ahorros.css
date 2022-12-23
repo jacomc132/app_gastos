@@ -574,3 +574,36 @@ select{
     color:var(--color7);
     text-decoration:none;
 }
+
+.modificar{
+    border-style:none;
+    border-color:none;
+    text-decoration:none;
+}
+
+.eliminar{
+    border-style:none;
+    border-color:none;
+    text-decoration:none;
+
+}
+
+.contenedor_ahorros{
+    display:grid;
+    grid-template-columns:60% 5% 5%;
+}
+
+.contenedor_elemento_categoria{
+    grid-column:1/2;
+}
+
+.eliminar_ahorro{
+    text-decoration:none;
+    grid-column:2/3;
+}
+
+.modificar_ahorro{
+    text-decoration:none;
+    grid-column:3/4;
+}
+

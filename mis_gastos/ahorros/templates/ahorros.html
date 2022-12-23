@@ -13,7 +13,7 @@
         <ul class="nav_container">
             <li class="li1"><a class="link_pagina_actual" href="/ahorros">Ahorros</a></li>
             <li class="li2"><a href="/billetera">Billeteras</a></li>
-            <li class="crear"><a target="_blank" href={% url 'crear_ahorro' %}>Crear ahorro</a></li>
+            <li class="crear"><a href={% url 'crear_ahorro' %}>Crear ahorro</a></li>
         </ul>
     </nav>
     
@@ -23,9 +23,15 @@
 
         <ul class="coin">
         {% for ahorro in ahorros %}
-            <li class="contenedor_elemento_categoria"><a id="link_ahorro"href="/ahorros/{{ahorro.pk}}">{{ahorro.nombre_ahorro}}</a></li>
-        {% endfor %}
+            <div class="contenedor_ahorros">
+                <li class="contenedor_elemento_categoria"><a id="link_ahorro"href="/ahorros/{{ahorro.pk}}">{{ahorro.nombre_ahorro}}</a></li>
+                <a class="eliminar_ahorro"href="/ahorros/{{ahorro.pk}}/eliminar_ahorro">❌</a>
+                <a class="modificar_ahorro"href="/ahorros/{{ahorro.pk}}/modificar_ahorro">✏️</a>
+            </div>
+                {% endfor %}
         </ul>
     </div>
 </body>
 </html>
+
+

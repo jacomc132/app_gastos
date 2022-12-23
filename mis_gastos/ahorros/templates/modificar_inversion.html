@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/estilos_ahorros.css' %}">
+    <title>modificar_inversion</title>
+</head>
+<body>
+
+    <div class="contenido" id="formulario_crear_inversion">
+        <h1 id="titulo_crear_inversion">Crea tu inversión...</h1>
+        <form method="post" action="/ahorros/{{ahorro.pk}}/{{inversion.pk}}/modificar_inversion">
+            {% csrf_token %}
+
+            <label for="nombre_inversion">Nombre inversión</label>
+            <input value="{{inversion.nombre_inversion}}" type="text" id="nombre_inversion" name="nombre_inversion">
+
+            <label for="tipo_inversion">Tipo de inversión</label>
+            <select name="tipo_inversion" id="tipo_inversion">
+                <option>Activo</option>
+                <option>Pasivo</option>
+            </select>
+
+            <label for="valor_inversion">Valor inversión</label>
+            <input name="valor_inversion"value="{{inversion.valor_inversion}}" type="number" id="valor_inversion">
+
+            <label for="ROI">ROI</label>
+            <input name="ROI" value="{{inversion.ROI}}" type="number" id="ROI" max=100>
+
+
+            <button class="boton_crear">save</button>
+        </form>
+    </div>
+
+</body>
+</html>

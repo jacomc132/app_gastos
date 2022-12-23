@@ -26,12 +26,12 @@
             {% if billeteras_ahorro %}
                 <ul>
                     {% for billetera in billeteras_ahorro %}
-                        <li id="contenedor_billetera_asociada"><a id="link_billetera_asociada" href="/billetera/{{billetera.pk}}">▹{{billetera.nombre_billetera}}</class=a></li>
+                         <li id="contenedor_billetera_asociada"><a id="link_billetera_asociada" href="/billetera/{{billetera.pk}}">▹{{billetera.nombre_billetera}}</a></li> 
                     {% endfor %}
                 </ul>
             {% else %}
                 <div id="contenedor_sin_billeteras">
-                    <a href="/billetera/crear_billetera" id="sin_billeteras2">Sin billeteras. Créalas aquí...</a>
+                    <a href="/billetera/crear_billetera" id="sin_billeteras2">Sin billeteras. Créalas aquí...</a> 
                 </div>
             {% endif %}
         </div>
@@ -44,12 +44,18 @@
                     <td>Nombre inversión</td>
                     <td>Tipo inversión</td>
                     <td>Valor inversión</td>
+                    <td>Fecha</td>
+                    <td>ROI</td>
                 </tr>
                 {% for inversion in inversiones_ahorro %}
                 <tr>
                     <td>{{inversion.nombre_inversion}}</td>
                     <td>{{inversion.tipo_inversion}}</td>
                     <td>{{inversion.valor_inversion}}</td>
+                    <td>{{inversion.fecha_creacion}}</td>
+                    <td>{{inversion.ROI}}</td>
+                    <td class="eliminar"><a class="eliminar"href="/ahorros/{{ahorro.pk}}/{{inversion.pk}}/eliminar_inversion">❌</a></td>
+                    <td class="modificar"><a class="modificar" href="/ahorros/{{ahorro.pk}}/{{inversion.pk}}/modificar_inversion">✏️</a></td>
                 </tr>
                 {% endfor %}
             </table>

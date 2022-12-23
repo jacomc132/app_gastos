@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/estilos_ahorros.css' %}">
+    <title>modificar_ahorro</title>
+</head>
+<body>
+
+    <div class="contenido" id="formulario_crear_ahorro">
+        <h1 id="titulo_crear_ahorro">Crea tu ahorro...</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="nombre_ahorro">Nombre ahorro</label>
+            <input value="{{ahorro.nombre_ahorro}}" type="text" name="nombre_ahorro" id="nombre_ahorro">
+
+            <label for="cantidad_dinero">Cantidad dinero</label>
+            <input value="{{ahorro.cantidad_dinero}}" type="number" name="cantidad_dinero" id="cantidad_dinero">
+
+            <button class="boton_crear">save</button>
+        </form>
+    </div>
+
+</body>
+</html>

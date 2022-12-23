@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -20,6 +21,8 @@ class Inversion(models.Model):
     ahorro_id = models.ForeignKey(Ahorro, on_delete=models.CASCADE)
     tipo_inversion = models.CharField(max_length = 50)
     valor_inversion = models.FloatField(default=0)
+    fecha_creacion = models.DateTimeField(default=timezone.now())
+    ROI = models.IntegerField(default=0)
 
     def __str__(self):
         return self.nombre_inversion

@@ -34,6 +34,8 @@
             <td>{{i.pk}}</td>
             <td>{{i.descripcion}}</td>
             <td>{{i.valor}}</td>
+            <td class="contenedor_eliminar_ingreso_gasto"><a class="eliminar_ingreso_gasto" href="/billetera/{{billetera.pk}}/{{categoria.tipo_categoria}}/{{categoria.pk}}/{{i.pk}}/eliminar_ingreso_gasto">❌</a></td>
+            <td class="contenedor_modificar_ingreso_gasto"><a class="modificar_ingreso_gasto" href="">✏️</a></td>
         </tr>
         {% endfor %}
     </table>

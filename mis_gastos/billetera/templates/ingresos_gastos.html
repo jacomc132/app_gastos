@@ -18,7 +18,7 @@
                 <a href="/billetera/{{billetera.pk}}">Billetera actual</a>
             </li>
             <li class="crear">
-                <a target="_blank" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/crear_categoria">Crear categoría</a>
+                <a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/crear_categoria">Crear categoría</a>
             </li>
         </ul>
     </nav>
@@ -30,7 +30,11 @@
         
         <ul>
             {% for categoria in categorias %}
-                <li class="contenedor_elemento_categoria"><a class="elemento_categoria" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
+                <div class="categorias_container">
+                    <li class="contenedor_elemento_categoria"><a class="elemento_categoria" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
+                    <a class="eliminar_categoria" href="/billetera/{{billetera.pk}}/{{categoria.tipo_categoria}}/{{categoria.pk}}/eliminar_categoria">❌</a>
+                    <a class="modificar_categoria" href="">✏️</a>
+                </div>    
             {% endfor %}
         </ul>
     </div>
