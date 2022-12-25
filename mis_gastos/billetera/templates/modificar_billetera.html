@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
+    <title>modificar_billetera</title>
+</head>
+<body>
+
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li class="li1"><a href="/billetera">Billeteras</a></li>
+        </ul>
+    </nav>
+    
+    
+    <div class="contenido">
+        <h1 id="titulo_crear_billetera">Modifica tu billetera...</h1>
+
+        <form method="POST" action="/billetera/{{billetera.pk}}/modificar_billetera">
+            {% csrf_token %} 
+            
+            <label for="nombre_billetera">Nombre billetera</label>
+            <input value="{{billetera.nombre_billetera}}" type="text" id="nombre_billetera" name="nombre_billetera">
+
+            <label for="total_dinero">Cantidad dinero</label>
+            <input value="{{billetera.total_dinero}}" type="number" id="total_dinero" name="total_dinero">
+
+            <label for="ahorro_id">Ahorro asociado</label>
+            <select name="ahorro_id" id="ahorro_id">
+                {% for ahorro in ahorros %}
+                    <option {% if ahorro == ahorro_asociado %}selected{% endif %} value="{{ahorro.pk}}">{{ahorro}}</option>
+                {% endfor %}
+            </select>
+
+            <button id="boton_crear_billetera">
+                Save
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

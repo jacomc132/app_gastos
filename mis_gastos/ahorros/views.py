@@ -93,10 +93,14 @@ def modificar_inversion(request,id_ahorro,id_inversion):
         return render(request,'modificar_inversion.html',{'ahorro':ahorro,'inversion':inversion})
 
     elif request.method == 'POST':
+        ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) + float(inversion.valor_inversion)
+        ahorro.save()
         inversion.nombre_inversion = request.POST["nombre_inversion"]
         inversion.tipo_inversion = request.POST['tipo_inversion']
         inversion.valor_inversion = request.POST['valor_inversion']
         inversion.ROI = request.POST['ROI']
+        ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) - float(inversion.valor_inversion)
+        ahorro.save()
         inversion.save()
         return redirect(f"/ahorros/{ahorro.pk}")
 

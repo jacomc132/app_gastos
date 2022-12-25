@@ -149,6 +149,9 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
 
 def eliminar_billetera(request,ruta_billetera):
     billetera=Billetera.objects.get(pk=ruta_billetera)
+    ahorro=Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+    ahorro.cantidad_dinero = float(ahorro.cantidad_dinero)-float(billetera.total_dinero)
+    ahorro.save()
     billetera.delete()
     return redirect(f"/billetera")
 
@@ -205,9 +208,85 @@ def eliminar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,in
     
 
 
+def modificar_billetera(request,ruta_billetera):
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+    ahorros = Ahorro.objects.all()
+
+    if request.method == "GET":
+        return render(request,"modificar_billetera.html",{"ahorros":ahorros,"billetera":billetera,"ahorro_asociado":ahorro_asociado})
+
+
+    elif request.method == "POST":
+        ahorro_asociado.cantidad_dinero = float(ahorro_asociado.cantidad_dinero) - float(billetera.total_dinero)
+        ahorro_asociado.save()
+        billetera.nombre_billetera = request.POST["nombre_billetera"]
+        billetera.total_dinero = request.POST["total_dinero"]
+        nuevo_ahorro_asociado = Ahorro.objects.get(pk=request.POST["ahorro_id"])
+        billetera.ahorro_id = nuevo_ahorro_asociado
+        billetera.save()
+        nuevo_ahorro_asociado.cantidad_dinero = float(nuevo_ahorro_asociado.cantidad_dinero) + float(billetera.total_dinero)
+        nuevo_ahorro_asociado.save()
+        return redirect("/billetera")
 
 
 
+
+def modificar_categoria(request,ruta_billetera,categoria_type,categoria_id):
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    categoria = Categoria.objects.get(pk=categoria_id)
+
+    if request.method == 'GET':
+        return render(request,'modificar_categoria.html',{'categoria':categoria,'billetera':billetera})
+
+
+    elif request.method == 'POST':
+        categoria.nombre_categoria = request.POST['nombre_categoria']
+        categoria.save()
+        return redirect(f'/billetera/{ruta_billetera}/{categoria_type}')
+        
+
+
+
+
+def modificar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,ingreso_gasto_id):
+    billetera = Billetera.objects.get(pk=ruta_billetera)
+    categoria = Categoria.objects.get(pk=categoria_id)
+    ahorro = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+    
+    if categoria_type == 'ingresos':
+        ingreso_gasto = Ingreso.objects.get(pk=ingreso_gasto_id)
+    elif categoria_type == 'gastos':
+        ingreso_gasto = Gasto.objects.get(pk=ingreso_gasto_id)
+
+
+    if request.method == 'GET':
+        return render(request,'modificar_ingreso_gasto.html',{'billetera':billetera,'categoria':categoria,'ingreso_gasto':ingreso_gasto})
+    
+
+    elif request.method == 'POST':
+        ingreso_gasto.descripcion = request.POST['descripcion']
+        
+
+        if categoria_type == 'ingresos':
+            billetera.total_dinero = float(billetera.total_dinero) - float(ingreso_gasto.valor)
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) - float(ingreso_gasto.valor)
+            ingreso_gasto.valor = request.POST['valor']
+            billetera.total_dinero = float(billetera.total_dinero) + float(ingreso_gasto.valor)
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) + float(ingreso_gasto.valor)
+
+        elif categoria_type == 'gastos':
+            billetera.total_dinero = float(billetera.total_dinero) + float(ingreso_gasto.valor)
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) + float(ingreso_gasto.valor)
+            ingreso_gasto.valor = request.POST['valor']
+            billetera.total_dinero = float(billetera.total_dinero) - float(ingreso_gasto.valor)
+            ahorro.cantidad_dinero = float(ahorro.cantidad_dinero) - float(ingreso_gasto.valor)
+
+        billetera.save()
+        ahorro.save()
+        ingreso_gasto.save()
+
+        return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
 
 

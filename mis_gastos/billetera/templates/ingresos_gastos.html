@@ -33,7 +33,7 @@
                 <div class="categorias_container">
                     <li class="contenedor_elemento_categoria"><a class="elemento_categoria" href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}">{{categoria.nombre_categoria}}</a></li>
                     <a class="eliminar_categoria" href="/billetera/{{billetera.pk}}/{{categoria.tipo_categoria}}/{{categoria.pk}}/eliminar_categoria">❌</a>
-                    <a class="modificar_categoria" href="">✏️</a>
+                    <a class="modificar_categoria" href="/billetera/{{billetera.pk}}/{{categoria.tipo_categoria}}/{{categoria.pk}}/modificar_categoria">✏️</a>
                 </div>    
             {% endfor %}
         </ul>

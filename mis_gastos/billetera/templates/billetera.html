@@ -24,7 +24,7 @@
             <div class="contenedor_billeteras">
                 <li class="elemento_lista_container" id="nombre_billetera"><a href="/billetera/{{billetera.id}}">~ {{billetera}}</a></li>
                 <a class="eliminar_billetera" href="/billetera/eliminar_billetera/{{billetera.pk}}">❌</a>
-                <a class="modificar_billetera" href="">✏️</a>
+                <a class="modificar_billetera" href="/billetera/{{billetera.pk}}/modificar_billetera">✏️</a>
             </div>
         {% endfor %}
         </ul>
