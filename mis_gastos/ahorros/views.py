@@ -1,18 +1,21 @@
 from django.shortcuts import render,redirect
+from django.urls import reverse
 from django.http import HttpResponse
 from .forms import formulario_crear_ahorro, formulario_crear_inversion
 from .models import Ahorro,Inversion
 from django.utils import timezone
 from billetera.models import Billetera,Ingreso, Gasto
 from datetime import date
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/home/login')
 def ahorros(request):
     ahorros=Ahorro.objects.all()
     return render(request,'ahorros.html',{'ahorros':ahorros})
 
 
-
+@login_required(login_url='/home/login')
 def crear_ahorro(request):
     if request.method == 'GET':
         return render(request,'crear_ahorro.html',{'formulario_crear_ahorro':formulario_crear_ahorro})
@@ -22,11 +25,11 @@ def crear_ahorro(request):
         fecha_actual=timezone.now()
         nuevo_ahorro = Ahorro(nombre_ahorro=request.POST['nombre_ahorro'],fecha_creacion=fecha_actual,cantidad_dinero=request.POST['cantidad_dinero'])
         nuevo_ahorro.save()
-        return redirect('/ahorros')
+        return redirect(reverse('ahorros:ahorros'))
 
 
 
-
+@login_required(login_url='/home/login')
 def ahorro_actual(request,id_ahorro):
     ahorro = Ahorro.objects.get(pk=id_ahorro)
     billeteras_ahorro = Billetera.objects.filter(ahorro_id=id_ahorro)
@@ -35,7 +38,7 @@ def ahorro_actual(request,id_ahorro):
 
 
 
-
+@login_required(login_url='/home/login')
 def crear_inversion(request,id_ahorro):
     if request.method == 'GET':
         return render(request,'crear_inversion.html',{'formulario_crear_inversion':formulario_crear_inversion})
@@ -50,7 +53,7 @@ def crear_inversion(request,id_ahorro):
 
 
 
-
+@login_required(login_url='/home/login')
 def eliminar_ahorro(request,id_ahorro):
     ahorro = Ahorro.objects.get(pk = id_ahorro)
     ahorro.delete()
@@ -58,7 +61,7 @@ def eliminar_ahorro(request,id_ahorro):
     
 
 
-
+@login_required(login_url='/home/login')
 def modificar_ahorro(request,id_ahorro):
     ahorro = Ahorro.objects.get(pk=id_ahorro)
 
@@ -73,7 +76,7 @@ def modificar_ahorro(request,id_ahorro):
         return redirect(f"/ahorros")
     
 
-
+@login_required(login_url='/home/login')
 def eliminar_inversion(request,id_ahorro,id_inversion):
     ahorro = Ahorro.objects.get(pk=id_ahorro)
     inversion=Inversion.objects.get(pk=id_inversion)
@@ -84,7 +87,7 @@ def eliminar_inversion(request,id_ahorro,id_inversion):
 
 
 
-
+@login_required(login_url='/home/login')
 def modificar_inversion(request,id_ahorro,id_inversion):
     ahorro = Ahorro.objects.get(pk=id_ahorro)
     inversion = Inversion.objects.get(pk=id_inversion)
@@ -103,5 +106,14 @@ def modificar_inversion(request,id_ahorro,id_inversion):
         ahorro.save()
         inversion.save()
         return redirect(f"/ahorros/{ahorro.pk}")
+
+
+
+
+
+
+
+
+
 
 

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'billetera.apps.BilleteraConfig',
     'ahorros.apps.AhorrosConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [

@@ -37,6 +37,10 @@ class Ingreso(models.Model):
     def __str__(self):
         return self.descripcion
 
+    
+    def positivo(self):
+        return self.valor >= 0
+
 
 
 

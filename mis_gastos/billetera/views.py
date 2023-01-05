@@ -4,6 +4,8 @@ from .models import Billetera, Ingreso, Gasto, Categoria
 from ahorros.models import Ahorro,Inversion
 from .forms import formulario_crear_billetera,formulario_crear_ingreso_gasto,formulario_crear_categoria
 from django.utils import timezone
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -11,6 +13,7 @@ from django.utils import timezone
 *Página principal de app billetera.
 *Realiza consulta a base de datos para mostrar en pantalla todas las billeteras por medio del templare billeteras.html
 '''
+@login_required(login_url='/home/login')
 def billetera(request):
     mis_billeteras = Billetera.objects.all()
     return render(request,'billetera.html',{'mis_billeteras':mis_billeteras})
@@ -19,6 +22,7 @@ def billetera(request):
 *Vista que recibe como parámetros un request.
 *Permite crear una nueva billetera por medio de una interfaz de usuario.
 '''
+@login_required(login_url='/home/login')
 def crear_billetera(request):
     if request.method == 'GET':
         #Mostrar interfaz
@@ -39,6 +43,7 @@ def crear_billetera(request):
 *Vista que recibe como parámetros un request, id de billetera del ingreso.
 *Realiza una consulta a base de datos para mostrar información de la billetera actual mediante el template billetera_actual.html
 '''
+@login_required(login_url='/home/login')
 def billetera_actual(request,ruta_billetera):
     billetera = Billetera.objects.get(pk = ruta_billetera)
     return render(request,'billetera_actual.html',
@@ -53,6 +58,7 @@ def billetera_actual(request,ruta_billetera):
 *Vista que recibe como parámetros un request, id de billetera del ingreso.
 *Realiza consultas en bases de datos con ese id y por último renderiza el template gastos.html
 '''
+@login_required(login_url='/home/login')
 def ingresos_gastos(request,ruta_billetera,categoria_type):
     billetera = Billetera.objects.get(pk = ruta_billetera)
     categorias = Categoria.objects.filter(tipo_categoria=categoria_type)
@@ -71,6 +77,7 @@ def ingresos_gastos(request,ruta_billetera,categoria_type):
 View que permite crear una categoría, la categoría pertenecerá a ingresos ó gastos, esto 
 depende del parámetro dado por la url.
 '''
+@login_required(login_url='/home/login')
 def crear_categoria(request,ruta_billetera,categoria_type):
     if request.method == 'GET':
         billetera = Billetera.objects.get(pk=ruta_billetera)
@@ -87,6 +94,7 @@ def crear_categoria(request,ruta_billetera,categoria_type):
 '''
 
 '''
+@login_required(login_url='/home/login')
 def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
     mi_billetera = Billetera.objects.get(pk = ruta_billetera)
     categoria = Categoria.objects.get(pk = categoria_id)
@@ -117,6 +125,7 @@ def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
 '''
 
 '''
+@login_required(login_url='/home/login')
 def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
@@ -146,7 +155,7 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
     
-
+@login_required(login_url='/home/login')
 def eliminar_billetera(request,ruta_billetera):
     billetera=Billetera.objects.get(pk=ruta_billetera)
     ahorro=Ahorro.objects.get(pk=billetera.ahorro_id.pk)
@@ -157,7 +166,7 @@ def eliminar_billetera(request,ruta_billetera):
 
 
 
-
+@login_required(login_url='/home/login')
 def eliminar_categoria(request,ruta_billetera,categoria_type,categoria_id):
     categoria=Categoria.objects.get(pk=categoria_id)
     billetera = Billetera.objects.get(pk=ruta_billetera)
@@ -184,7 +193,7 @@ def eliminar_categoria(request,ruta_billetera,categoria_type,categoria_id):
 
 
 
-
+@login_required(login_url='/home/login')
 def eliminar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,ingreso_gasto_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     ahorro = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
@@ -207,7 +216,7 @@ def eliminar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,in
         return redirect(f"/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}")
     
 
-
+@login_required(login_url='/home/login')
 def modificar_billetera(request,ruta_billetera):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
@@ -231,7 +240,7 @@ def modificar_billetera(request,ruta_billetera):
 
 
 
-
+@login_required(login_url='/home/login')
 def modificar_categoria(request,ruta_billetera,categoria_type,categoria_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     categoria = Categoria.objects.get(pk=categoria_id)
@@ -248,7 +257,7 @@ def modificar_categoria(request,ruta_billetera,categoria_type,categoria_id):
 
 
 
-
+@login_required(login_url='/home/login')
 def modificar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,ingreso_gasto_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     categoria = Categoria.objects.get(pk=categoria_id)
