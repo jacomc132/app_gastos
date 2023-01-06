@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.forms import UserCreationForm
 
 
 
@@ -15,17 +16,18 @@ def home(request):
 """Vista que permite que un usuario se registre"""
 def registerPage(request):
     if request.method == "GET":
-        return render(request,'register.html')
+        return render(request,'register.html',{'UserCreationForm':UserCreationForm})
 
 
     if request.method == "POST":
-        usuario = request.POST.get("username")
-        password = request.POST.get("password")
-
-    try:
-        pass
-    except:
-        pass
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            login(request,user)
+            return redirect('home')
+    
 
 
 
@@ -33,7 +35,7 @@ def registerPage(request):
 def loginPage(request):
 
     if request.method == "POST":
-        username = request.POST.get("username")
+        username = request.POST.get("username").lower()
         password = request.POST.get("password")
 
         try:

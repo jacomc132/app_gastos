@@ -12,16 +12,10 @@
 
     <div class="contenido" id="formulario_crear_ahorro">
         <h1 id="titulo_crear_ahorro">Crea tu usuario</h1>
-        <form method="POST">
+        <form method="POST" action="">
             {% csrf_token %}
-
-            <label for="username">Username</label>
-            <input type="text" name="username" placeholder="Enter username" >
-
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Enter password">
-
-            <input type="submit" value="Login">
+            {{UserCreationForm}}
+            <input type="submit" value="Register">
         </form>
     </div>
 
