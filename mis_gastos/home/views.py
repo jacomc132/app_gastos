@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -15,10 +16,7 @@ def home(request):
 
 """Vista que permite que un usuario se registre"""
 def registerPage(request):
-    if request.method == "GET":
-        return render(request,'register.html',{'UserCreationForm':UserCreationForm})
-
-
+    
     if request.method == "POST":
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -27,6 +25,8 @@ def registerPage(request):
             user.save()
             login(request,user)
             return redirect('home')
+    
+    return render(request,'register.html',{'UserCreationForm':UserCreationForm})
     
 
 
@@ -57,6 +57,7 @@ def loginPage(request):
 
 
 """Vista para logout de usuario"""
+@login_required(login_url="/home/login")
 def logoutPage(request):
     logout(request)
     return redirect(reverse('home'))

@@ -6,8 +6,7 @@ from .forms import formulario_crear_billetera,formulario_crear_ingreso_gasto,for
 from django.utils import timezone
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-
-
+from django.contrib.auth.models import User
 
 '''
 *Página principal de app billetera.
@@ -15,7 +14,9 @@ from django.contrib.auth.decorators import login_required
 '''
 @login_required(login_url='/home/login')
 def billetera(request):
+    user = User.objects.get(pk=request.user.pk)
     mis_billeteras = Billetera.objects.all()
+    mis_billeteras = mis_billeteras.filter(usuario_id=user)
     return render(request,'billetera.html',{'mis_billeteras':mis_billeteras})
 
 '''
@@ -24,14 +25,17 @@ def billetera(request):
 '''
 @login_required(login_url='/home/login')
 def crear_billetera(request):
+
+    user = User.objects.get(pk=request.user.pk)
+    ahorros = Ahorro.objects.filter(usuario_id = user.pk)
     if request.method == 'GET':
         #Mostrar interfaz
-        return render(request,"crear_billetera.html",{'form':formulario_crear_billetera})
+        return render(request,"crear_billetera.html",{'ahorros':ahorros})
     elif request.method == 'POST':
         #Método POST (Postear info en base de datos)
         fecha_actual = timezone.now()
         ahorro_seleccionado=request.POST['ahorro_id']
-        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=Ahorro.objects.get(pk=ahorro_seleccionado))
+        nueva_billetera = Billetera(nombre_billetera = request.POST['nombre_billetera'], fecha_creacion=fecha_actual, total_dinero = request.POST['total_dinero'],ahorro_id=Ahorro.objects.get(pk=ahorro_seleccionado),usuario_id=user)
         nueva_billetera.save()
         ahorro = Ahorro.objects.get(pk=ahorro_seleccionado)
         ahorro.cantidad_dinero = ahorro.cantidad_dinero + float(request.POST['total_dinero'])
@@ -45,7 +49,9 @@ def crear_billetera(request):
 '''
 @login_required(login_url='/home/login')
 def billetera_actual(request,ruta_billetera):
+    user = User.objects.get(pk=request.user.pk)
     billetera = Billetera.objects.get(pk = ruta_billetera)
+    
     return render(request,'billetera_actual.html',
     {
         'nombre_billetera':billetera.nombre_billetera,
@@ -60,9 +66,13 @@ def billetera_actual(request,ruta_billetera):
 '''
 @login_required(login_url='/home/login')
 def ingresos_gastos(request,ruta_billetera,categoria_type):
+    user = User.objects.get(pk = request.user.pk)
+
     billetera = Billetera.objects.get(pk = ruta_billetera)
     categorias = Categoria.objects.filter(tipo_categoria=categoria_type)
     categorias = categorias.filter(billetera_id=ruta_billetera)
+    categorias = categorias.filter(usuario_id = user.pk)
+
     return render(request,'ingresos_gastos.html',
     {
         'nombre_billetera': billetera.nombre_billetera,
@@ -79,6 +89,9 @@ depende del parámetro dado por la url.
 '''
 @login_required(login_url='/home/login')
 def crear_categoria(request,ruta_billetera,categoria_type):
+
+    user = User.objects.get(pk=request.user.pk)
+
     if request.method == 'GET':
         billetera = Billetera.objects.get(pk=ruta_billetera)
         return render(request,"crear_categoria.html",{'formulario_crear_categoria':formulario_crear_categoria,
@@ -88,7 +101,7 @@ def crear_categoria(request,ruta_billetera,categoria_type):
     
     elif request.method == 'POST':
         billetera = Billetera.objects.get(pk = ruta_billetera)
-        billetera.categoria_set.create(billetera_id=ruta_billetera,nombre_categoria=request.POST['nombre_categoria'],tipo_categoria=categoria_type)
+        billetera.categoria_set.create(billetera_id=ruta_billetera,nombre_categoria=request.POST['nombre_categoria'],tipo_categoria=categoria_type,usuario_id=user)
         return redirect(f'/billetera/{ruta_billetera}/{categoria_type}')
 
 '''
@@ -129,6 +142,7 @@ def categoria_actual(request,ruta_billetera,categoria_type,categoria_id):
 def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
     billetera = Billetera.objects.get(pk=ruta_billetera)
     ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
+    user = User.objects.get(pk=request.user.pk)
 
     if request.method == 'GET':
         categoria = Categoria.objects.get(pk=categoria_id)
@@ -139,7 +153,7 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
         categoria = Categoria.objects.get(pk=categoria_id)
 
         if categoria_type == 'ingresos':
-            billetera.ingreso_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
+            billetera.ingreso_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'],usuario_id=user)
             billetera.total_dinero = billetera.total_dinero + float(request.POST['valor'])
             billetera.save()
             ahorro_asociado.cantidad_dinero = ahorro_asociado.cantidad_dinero + float(request.POST['valor'])
@@ -147,7 +161,7 @@ def crear_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id):
             return redirect(f'/billetera/{ruta_billetera}/{categoria_type}/{categoria_id}')
 
         elif categoria_type == 'gastos':
-            billetera.gasto_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'])
+            billetera.gasto_set.create(billetera_id=billetera.pk,categoria_id=categoria,descripcion=request.POST['descripcion'],valor=request.POST['valor'],usuario_id=user)
             billetera.total_dinero = billetera.total_dinero - float(request.POST['valor'])
             billetera.save()
             ahorro_asociado.cantidad_dinero = ahorro_asociado.cantidad_dinero - float(request.POST['valor'])
@@ -218,9 +232,11 @@ def eliminar_ingreso_gasto(request,ruta_billetera,categoria_type,categoria_id,in
 
 @login_required(login_url='/home/login')
 def modificar_billetera(request,ruta_billetera):
+    user = User.objects.get(pk=request.user.pk)
     billetera = Billetera.objects.get(pk=ruta_billetera)
     ahorro_asociado = Ahorro.objects.get(pk=billetera.ahorro_id.pk)
     ahorros = Ahorro.objects.all()
+    ahorros = ahorros.filter(usuario_id = user.pk)
 
     if request.method == "GET":
         return render(request,"modificar_billetera.html",{"ahorros":ahorros,"billetera":billetera,"ahorro_asociado":ahorro_asociado})

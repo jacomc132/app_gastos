@@ -7,25 +7,31 @@ from django.utils import timezone
 from billetera.models import Billetera,Ingreso, Gasto
 from datetime import date
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 # Create your views here.
 @login_required(login_url='/home/login')
 def ahorros(request):
+    user = User.objects.get(pk=request.user.pk)
     ahorros=Ahorro.objects.all()
+    ahorros = ahorros.filter(usuario_id=user.pk)
     return render(request,'ahorros.html',{'ahorros':ahorros})
 
 
 @login_required(login_url='/home/login')
 def crear_ahorro(request):
+
+    user = User.objects.get(pk=request.user.pk)
+
     if request.method == 'GET':
         return render(request,'crear_ahorro.html',{'formulario_crear_ahorro':formulario_crear_ahorro})
 
 
     elif request.method == 'POST':
         fecha_actual=timezone.now()
-        nuevo_ahorro = Ahorro(nombre_ahorro=request.POST['nombre_ahorro'],fecha_creacion=fecha_actual,cantidad_dinero=request.POST['cantidad_dinero'])
+        nuevo_ahorro = Ahorro(nombre_ahorro=request.POST['nombre_ahorro'],fecha_creacion=fecha_actual,cantidad_dinero=request.POST['cantidad_dinero'],usuario_id=user)
         nuevo_ahorro.save()
-        return redirect(reverse('ahorros:ahorros'))
+        return redirect(reverse('ahorros'))
 
 
 
@@ -40,12 +46,15 @@ def ahorro_actual(request,id_ahorro):
 
 @login_required(login_url='/home/login')
 def crear_inversion(request,id_ahorro):
+
+    user = User.objects.get(pk=request.user.pk)
+
     if request.method == 'GET':
         return render(request,'crear_inversion.html',{'formulario_crear_inversion':formulario_crear_inversion})
     
     elif request.method == 'POST':
         ahorro_seleccionado = Ahorro.objects.get(pk=id_ahorro)
-        nueva_inversion = Inversion(nombre_inversion=request.POST['nombre_inversion'],ahorro_id= ahorro_seleccionado,tipo_inversion=request.POST['tipo_inversion'],valor_inversion=request.POST['valor_inversion'],fecha_creacion=timezone.now(),ROI=request.POST["ROI"])
+        nueva_inversion = Inversion(nombre_inversion=request.POST['nombre_inversion'],ahorro_id= ahorro_seleccionado,tipo_inversion=request.POST['tipo_inversion'],valor_inversion=request.POST['valor_inversion'],fecha_creacion=timezone.now(),ROI=request.POST["ROI"],usuario_id=user)
         nueva_inversion.save()
         ahorro_seleccionado.cantidad_dinero = ahorro_seleccionado.cantidad_dinero - float(nueva_inversion.valor_inversion)
         ahorro_seleccionado.save()
