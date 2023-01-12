@@ -21,7 +21,7 @@ body{
     width:96vw;
     height:70px;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 25% 50% 25%;
     margin:0;
 }
 
@@ -68,7 +68,6 @@ body{
 .li5{
     grid-column:5/6;
     grid-row: 2/3;
-    justify-self: center;
 }
 
 .li6{
@@ -120,11 +119,8 @@ table{
 }
 
 .crear{
-    grid-column:7/8;
+    grid-column:8/9;
     grid-row: 2/3;
-    font-family:cursive;
-    font-size:x-small;
-
 }
 
 
@@ -146,7 +142,7 @@ table{
     color:var(--color3);
 }
 
-#contenedor_billeteras{
+#contenedor_ahorros{
     width:500px;
     height:100vh;
     border-color:var(--color1);
@@ -178,6 +174,7 @@ button{
     background-color:var(--color1);
     border-style:solid;
     border-width: 1px;
+    border-color:var(--color1);
     height: 40px;
     width: 70px;
     border-radius:10px;
@@ -186,11 +183,6 @@ button{
 button:hover{
     color:var(--color1);
     background-color:var(--color4);
-}
-
-#titulo_crear_billetera{
-    padding-left:100px;
-    padding-bottom: 50px;
 }
 
 input{
@@ -356,11 +348,54 @@ select{
     border-width: 2px;
 }
 
-#boton_crear_billetera{
+.boton_crear{
     margin-left:200px;
     margin-top:10px;
 }
 
+/* Estilos para ahorros: */
+#titulo_ahorros{
+    color:var(--color1);
+    margin-left:160px;
+}
+
+#subtitulo_ahorros{
+    color:var(--color7);
+    margin-left:120px;
+}
+
+
+#titulo_crear_ahorro{
+    padding-bottom: 50px;
+    margin-left:100px;
+}
+
+#titulo_crear_inversion{
+    padding-bottom: 50px;
+    margin-left:100px;
+}
+
+#formulario_crear_ahorro{
+    width:50vw;
+    height: 60vh;
+    border-color:var(--color1);
+    border-style:solid;
+    border-radius:10px;
+    border-width: 2px;
+}
+
+#formulario_crear_inversion{
+    width:50vw;
+    height: 70vh;
+    border-color:var(--color1);
+    border-style:solid;
+    border-radius:10px;
+    border-width: 2px;
+}
+
+select{
+    border-color:var(--colo1);
+}
 
 .link_pagina_actual{
     display:flex;
@@ -373,7 +408,6 @@ select{
     background-color:var(--color);
 }
 
-
 .link_pagina_actual:hover{
     display:flex;
     justify-content: center;
@@ -384,59 +418,229 @@ select{
     border-width: 2px;
 }
 
-.contenedor_billeteras{
+.contenedor_billeteras_asociadas{
+    border-style:solid;
+    border-width: 3px;
+    border-radius:40px;
+    border-color:var(--color1);
+    width:40vw;
+    height:10vh;
+}
+
+#subtitulo_billeteras_asociadas{
+    margin-left:115px;
+    color:var(--color1);
+}
+
+#billetera_ahorro_actual{
+    margin-left:0px;
+    list-style:none;
+    display:flex;
+
+}
+
+#link_billetera_ahorro_actual{
+    text-decoration:none;
+    color:var(--color3);
+    font-weight: 1000;
+    font-size:large;
+}
+
+#link_billetera_ahorro_actual:hover{
+    text-decoration:none;
+    color:var(--color7);
+}
+
+#link_ahorro{
+    text-decoration:none;
+    color:var(--color3);
+    font-weight: 1000;
+    font-size:large;
+}
+
+#link_ahorro:hover{
+    text-decoration:none;
+    color:var(--color7);
+}
+
+
+/* Estilos específicos para ahorro_actual.html: */
+
+#titulo_ahorro_actual{
+    padding-left:350px;
+    font-family:'Courier New', Courier, monospace;
+    color:var(--color5);
+}
+
+#contenido_ahorro_actual{
+    font-family:'Courier New', Courier, monospace;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
+
+#contenedor_info_ahorro{
+    width: 20vw;
+    height: 80vh;
+    border-style:solid;
+    border-color:var(--color1);
+    border-radius:10px;
+    display:inline-block;
+    justify-self:center;
+    
+
+}
+
+#contenedor_tabla_inversiones{
+    width: 60vw;
+    padding:0px;
+    border:0px;
+    display: block;
+    color:var(--color5);
+}
+
+#contenedor_tabla_inversiones:hover{
+    width: 60vw;
+    padding:0px;
+    border:0px;
+    display: block;
+    color:var(--color5);
+}
+
+#monto{
+    margin-top: 15px;
+    color:var(--color7);
+    margin-left:20px;
+}
+
+#asociadas_subtitulo{
+    margin-left:10px;
+
+}
+
+#contenedor_billetera_asociada{
+    margin:0px;
+    padding:0px;
+    list-style:none;
+    font-size:small;
+}
+
+#link_billetera_asociada{
+    text-decoration:none;
+    color:var(--color3);
+    font-weight: 1000;
+    font-size:large;
+    padding:0px;
+    margin:0px;
+}
+
+
+#link_billetera_asociada:hover{
+    text-decoration:none;
+    color:var(--color7);
+}
+
+#sin_billeteras_asociadas{
+    margin-left:10px;
+
+}
+
+#titulo_inversiones{
+    border-color: var(--color3);
+    border-radius: 10px;
+    grid-column:2/3;
+    margin-left:220px;
+    color:var(--color7);
+}
+
+.filas_tablas{
+    color:var(--color5);
+}
+
+#sin_billeteras{
+    margin:0px;
+    font-size:small;
+    margin-left:23px;
+    color:black;
+}
+
+#sin_billeteras2{
+    margin:0px;
+    font-size:small;
+    margin-left:10px;
+    color:var(--color5);
+    text-decoration:none;
+    font-weight: 900;
+}
+
+#sin_billeteras2:hover{
+    font-size:medium;
+    margin-left:10px;
+    color:var(--color7);
+    text-decoration:none;
+}
+
+.modificar{
+    border-style:none;
+    border-color:none;
+    text-decoration:none;
+}
+
+.eliminar{
+    border-style:none;
+    border-color:none;
+    text-decoration:none;
+
+}
+
+.contenedor_ahorros{
     display:grid;
     grid-template-columns:60% 5% 5%;
 }
 
-.contenedor_elementos{
+.contenedor_elemento_categoria{
     grid-column:1/2;
 }
 
-.eliminar_billetera{
+.eliminar_ahorro{
     text-decoration:none;
     grid-column:2/3;
 }
 
-.modificar_billetera{
+.modificar_ahorro{
     text-decoration:none;
     grid-column:3/4;
 }
 
-.categorias_container{
-    display:grid;
-    grid-template-columns:60% 5% 5%;
+/* Estilos para home */
+
+#login{
+    grid-row:2/3;
+    grid-column:7/8;
 }
 
-.eliminar_categoria{
-    text-decoration:none;
-    grid-column:2/3;
+#link_home{
+    display:flex;
+    justify-content: center;
+    height:30px;
+    width:70px;
+    border-style:solid;
+    border-color:var(--color4);
+    border-width: 2px;
+    background-color:var(--color);
 }
 
-.modificar_categoria{
-    text-decoration:none;
-    grid-column:3/4;
+#link_home:hover{
+    display:flex;
+    justify-content: center;
+    height:30px;
+    width:70px;
+    border-style:solid;
+    border-color:var(--color3);
+    border-width: 2px;
 }
 
-.contenedor_eliminar_ingreso_gasto{
-    border-style:none;
-    width:20px;
 
-}
-
-.contenedor_modificar_ingreso_gasto{
-    border-style:none;
-}
-
-.eliminar_ingreso_gasto{
-    text-decoration:none;
-}
-
-.modificar_ingreso_gasto{
-    text-decoration:none;
-}
-
-/* Estilos de menú desplegable de user */
+/* Estilos para menú desplegable del login, logout y register: */
 .dropdown {
     grid-row:2/3;
     grid-column:8/9;

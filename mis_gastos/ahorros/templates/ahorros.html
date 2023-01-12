@@ -11,9 +11,16 @@
 <body>
     <nav class="navbar">
         <ul class="nav_container">
-            <li class="li1"><a class="link_pagina_actual" href="/ahorros">Ahorros</a></li>
-            <li class="li2"><a href="/billetera">Billeteras</a></li>
+            <li class="li1"><a href="/home">Home</a></li>
+            <li class="li2"><a class="link_pagina_actual" href="/ahorros">Ahorros</a></li>
+            <li class="li3"><a href="/billetera">Billeteras</a></li>
             <li class="crear"><a href={% url 'crear_ahorro' %}>Crear ahorro</a></li>
+            <div class="dropdown">
+                <button class="contenedor_user_image"><img class="user_image" src="{% static 'user_image.png' %}" alt="user_image"></button>
+                <div class="dropdown-content">
+                <a href="/home/logout">Logout</a>
+                </div>
+            </div>
         </ul>
     </nav>
     
