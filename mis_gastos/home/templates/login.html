@@ -1,4 +1,5 @@
 {% load static %}
+{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,12 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static '/styles/estilos_login.css' %}">
-    <title>login_register</title>
+    <title>login</title>
 </head>
 <body>
     {% if request.user.is_authenticated == False %}
-    <div class="contenido" id="formulario_crear_ahorro">
-        <h1 id="titulo_crear_ahorro">ContabiliApp</h1>
         {% if messages %}
             {% for message in messages %}
             <ul class="messages">
@@ -19,19 +18,30 @@
             </ul>
             {% endfor %}
         {% endif %}
-        <form method="POST">
+        <form method="POST" id="formulario_login">
             {% csrf_token %}
+            <div class="contenedor_titulo_app">
+                <h1 id="titulo_app">ContabiliApp</h1>
+            </div>
+            
+            <div class="username_container">
+                <label id="username_label" for="username">Username</label>
+                <input id="username_input" type="text" name="username" placeholder="Enter username" required>
+            </div>
 
-            <label for="username">Username</label>
-            <input type="text" name="username" placeholder="Enter username" required>
+            <div class="password_container">
+                <label id="password_label" for="password">Password</label>
+                <input id="password_input" type="password" name="password" placeholder="Enter password" required>
+            </div>
 
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Enter password" required>
-
-            <input type="submit" value="Login">
+            <div class="contenedor_submit_link_registro">
+                <input id="login_input_submit" type="submit" value="Login">
+                <a id="link_registro" href="{% url 'register' %}">¿Aún no tienes una cuenta?</a>
+            </div>
         </form>
-    </div>
-    <a href="{% url 'register' %}">¿Aún no tienes una cuenta?</a>
+        
+    
+    
     {% else %}
     <p>Ya tienes un inicio de sesión</p>
     {% endif %}
