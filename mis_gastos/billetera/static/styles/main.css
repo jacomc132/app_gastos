@@ -45,35 +45,41 @@ body{
     grid-column:1/2;
     grid-row: 2/3;
     justify-self: center;
+    font-family: monospace;
 }
 
 .li2{
     grid-column:2/3;
     grid-row: 2/3;
     justify-self: center;
+    font-family: monospace;
 }
 
 .li3{
     grid-column:3/4;
     grid-row: 2/3;
     justify-self: center;
+    font-family: monospace;
 }
 
 .li4{
     grid-column:4/5;
     grid-row: 2/3;
     justify-self: center;
+    font-family: monospace;
 }
 
 .li5{
     grid-column:5/6;
     grid-row: 2/3;
     justify-self: center;
+    font-family: monospace;
 }
 
 .li6{
     grid-column:6/7;
     grid-row: 2/3;
+    font-family: monospace;
 }
 
 
@@ -122,7 +128,7 @@ table{
 .crear{
     grid-column:7/8;
     grid-row: 2/3;
-    font-family:cursive;
+    font-family:monospace;
     font-size:x-small;
 
 }
@@ -176,7 +182,7 @@ label{
 button{
     color:var(--color2);
     background-color:var(--color1);
-    border-style:solid;
+    border-style:none;
     border-width: 1px;
     height: 40px;
     width: 70px;
@@ -361,12 +367,11 @@ select{
     margin-top:10px;
 }
 
-
 .link_pagina_actual{
     display:flex;
     justify-content: center;
     height:30px;
-    width:70px;
+    width:90px;
     border-style:solid;
     border-color:var(--color4);
     border-width: 2px;
@@ -377,8 +382,6 @@ select{
 .link_pagina_actual:hover{
     display:flex;
     justify-content: center;
-    height:30px;
-    width:70px;
     border-style:solid;
     border-color:var(--color3);
     border-width: 2px;

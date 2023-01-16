@@ -1,27 +1,14 @@
+{% extends 'main/billetera_main.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= "{% static '/styles/main.css' %}">
-    <title>billetera_actual</title>
-</head>
-<body>
-    <nav class="navbar">
-        <ul class="nav_container">
-            <li class="li1"><a href="/billetera">Billeteras</a></li>
-        </ul>
-    </nav>
+    {% block link %}<link rel="stylesheet" href= "{% static '/styles/main.css' %}">{% endblock %}
+    {% block title %}<title>billetera_actual</title>{% endblock %}
     
-    
+    {% block content %}
     <div class="contenido">
         <h1 class="titulo">{{nombre_billetera}}</h1>
         <p>~ Tu saldo disponible es: ${{billetera.total_dinero}}</p>
         <a id="link_ingresos" href="{{billetera_pk}}/ingresos">Ingresos</a>
         <a id="link_gastos" href="{{billetera_pk}}/gastos">Gastos</a>
     </div>
-</body>
-</html>
+    {% endblock content %}
 

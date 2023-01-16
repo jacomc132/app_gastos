@@ -1,53 +1,27 @@
+{% extends 'main/home_main.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/styles/home_styles.css' %}">
-    <title>home</title>
-</head>
-<body>
-    <nav class="navbar">
-        <ul class="nav_container">
-            <li class="li1"><a id="link_home" href="/home">Home</a></li>
-            <li class="li2"><a href="/ahorros">Ahorros</a></li>
-            <li class="li3"><a href="/billetera">Billeteras</a></li>
-            <li class="username"><a href="">{{request.user.username}}</a></li>
-            {% if request.user.is_authenticated %}
-            <div class="dropdown">
-                <button class="contenedor_user_image"><img class="user_image" src="{% static 'user_image.png' %}" alt="user_image"></button>
-                <div class="dropdown-content">
-                <a href="/home/logout">Logout</a>
-                </div>
-            </div>
-            {% else %}
-            <div class="dropdown">
-                <button><img class="user_image"src="{% static 'user_image.png' %}" alt="user_image"></button>
-                <div class="dropdown-content">
-                <a href="/home/login">Login</a>
-                <a href="/home/register">Register</a>
-                </div>
-            </div>
-            {% endif %}
-        </ul>
-    </nav>
-    <img class="logo_contabiliapp" src="{% static 'logo_contabiliapp.png' %}" alt="imagen contabiliapp">
-    <div class="contenido">
-        <h3 class="titulo_pregunta">¿Qué es ContabiliApp?</h3>
-        <p class="parrafo">Se trata de una herramienta informática diseñada para ayudar a las personas y empresas a llevar un registro de sus finanzas y realizar operaciones contables de manera eficiente y precisa.es una herramienta informática diseñada para ayudar a las personas y empresas a llevar un registro de sus finanzas y realizar operaciones contables de manera eficiente y precisa.</p>
+
+{% block link %}<link rel="stylesheet" href="{% static '/styles/home_styles.css' %}">{% endblock %}
+{% block title %}<title>home</title>{% endblock %}
+
+
+{% block content %}
+    <div id="contenido_home">
+        <h3 class="titulo_pregunta_home">¿Qué es ContabiliApp?</h3>
+        <p class="parrafo_home">Se trata de una herramienta informática diseñada para ayudar a las personas y empresas a llevar un registro de sus finanzas y realizar operaciones contables de manera eficiente y precisa.es una herramienta informática diseñada para ayudar a las personas y empresas a llevar un registro de sus finanzas y realizar operaciones contables de manera eficiente y precisa.</p>
         <img src="{% static 'imagen_contabilidad.png' %}" alt="imagen_contabilidad.png">
+
+        <h3 class="titulo_pregunta_home">Algunas de las funcionalidades que puede ofrecer una aplicación de contabilidad incluyen:</h3>
         <ul>
-            <h3>Algunas de las funcionalidades que puede ofrecer una aplicación de contabilidad incluyen:</h3>
-            <li>Ingresos: permite registrar y clasificar los ingresos, como salarios, intereses, alquileres, entre otros.</li>
-            <li>Gastos: permite registrar y clasificar los gastos, como facturas, compras, impuestos, entre otros.</li>
-            <li>Categorización: permite clasificar los ingresos y gastos en diferentes categorías, como alimentos, vivienda, transporte, entre otros.</li>
-            <li>Ahorros: permite la creación de ahorros los cuales pueden contener activos ó pasivos.</li>
+            <li class="elemento_lista_home">Ingresos: permite registrar y clasificar los ingresos, como salarios, intereses, alquileres, entre otros.</li>
+            <li class="elemento_lista_home">Gastos: permite registrar y clasificar los gastos, como facturas, compras, impuestos, entre otros.</li>
+            <li class="elemento_lista_home">Categorización: permite clasificar los ingresos y gastos en diferentes categorías, como alimentos, vivienda, transporte, entre otros.</li>
+            <li class="elemento_lista_home">Ahorros: permite la creación de ahorros los cuales pueden contener activos ó pasivos.</li>
         </ul>
         <img src="{% static 'imagen_ahorros.png' %}" alt="imagen_ahorros">
-    </div>
+
+    </div>  
+{% endblock %}   
     
     
-</body>
-</html>
+

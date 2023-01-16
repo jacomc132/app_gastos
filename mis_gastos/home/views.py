@@ -24,7 +24,7 @@ def registerPage(request):
             user.username = user.username.lower()
             user.save()
             login(request,user)
-            return redirect('home')
+            return redirect('home:home')
     
     return render(request,'register.html',{'UserCreationForm':UserCreationForm})
     
@@ -46,7 +46,7 @@ def loginPage(request):
 
         if user is not None:
             login(request,user)
-            return redirect(reverse('home'))
+            return redirect(reverse('home:home'))
 
 
         elif user == None:
@@ -60,7 +60,7 @@ def loginPage(request):
 @login_required(login_url="/home/login")
 def logoutPage(request):
     logout(request)
-    return redirect(reverse('home'))
+    return redirect(reverse('home:home'))
 
 
 

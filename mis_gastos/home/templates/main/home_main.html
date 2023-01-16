@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/home_navbar_styles.css' %}">
+    {% block link %}{% endblock %}
+    {% block title %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li class="li1"><a id="link_home" href="/home">Home</a></li>
+            <li class="li2"><a href="/ahorros">Ahorros</a></li>
+            <li class="li3"><a href="/billetera">Billeteras</a></li>
+            <li class="username"><a href="">{{request.user.username}}</a></li>
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+                <button class="contenedor_user_image"><img class="user_image" src="{% static 'user_image.png' %}" alt="user_image"></button>
+                <div class="dropdown-content">
+                <a href="{% url 'home:logout' %}">Logout</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="dropdown">
+                <button><img class="user_image"src="{% static 'user_image.png' %}" alt="user_image"></button>
+                <div class="dropdown-content">
+                <a href="/home/login">Login</a>
+                <a href="/home/register">Register</a>
+                </div>
+            </div>
+            {% endif %}
+        </ul>
+    </nav>
+    
+    <nav id="second_navbar_container">
+        <img class="logo_contabiliapp" src="{% static 'logo_contabiliapp.png' %}" alt="imagen contabiliapp">
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+</body>
+</html>

@@ -1,23 +1,15 @@
+{% extends 'main/billetera_main.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
-    <title>ingresos</title>
-</head>
-<body>
 
-<nav class='navbar'>
-    <ul class='nav_container'>
-        <li class="li1"><a href="/billetera">Billeteras</a></li>
-        <li class="li2"><a href="/billetera/{{billetera.pk}}">Billetera actual</a></li>
-        <li class="crear"><a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}/crear_ingreso_gasto">Crear {{categoria.tipo_categoria}}</a></li>
-    </ul>
-</nav>
 
+{% block link %}<link rel="stylesheet" href="{% static '/styles/main.css' %}">{% endblock link %}
+{% block title %}<title>ingresos</title>{% endblock title %}
+ 
+{% block nav_items %}
+    <li class="crear"><a href="/billetera/{{billetera.pk}}/{{tipo_categoria}}/{{categoria.pk}}/crear_ingreso_gasto">Crear {{categoria.tipo_categoria}}</a></li>
+{% endblock nav_items %}
+
+{% block content %}
 <div class="contenido" >
     <h2>Categoría: {{categoria.nombre_categoria}}</h2>
     <div class="divisor">
@@ -41,7 +33,4 @@
     </table>
     
 </div>
-
-
-</body>
-</html>
+{% endblock content %}

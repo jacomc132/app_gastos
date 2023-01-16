@@ -18,7 +18,7 @@
             <input type="submit" value="Register">
         </form>
     </div>
-    <a href="{% url 'login' %}">¿Ya tienes una cuenta?</a>
+    <a href="{% url 'home:login' %}">¿Ya tienes una cuenta?</a>
     {% else %}
     <p>Ya tienes un inicio de sesión</p>
     {% endif %}

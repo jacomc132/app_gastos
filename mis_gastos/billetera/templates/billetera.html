@@ -1,29 +1,14 @@
+{% extends 'main/billetera_main.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/styles/main.css' %}">
-    <title>billetera</title>
-</head>
-<body>
-    <nav class="navbar">
-        <ul class="nav_container">
-            <li class="li1"><a href="/home">Home</a></li>
-            <li class="li2"><a href="/ahorros">Ahorros</a></li>
-            <li class="li3"><a class="link_pagina_actual"href="/billetera">Billeteras</a></li>
-            <li class="crear"><a href={% url 'crear_billetera' %}>Crear billetera</a></li>
-            <div class="dropdown">
-                <button class="contenedor_user_image"><img class="user_image" src="{% static 'user_image.png' %}" alt="user_image"></button>
-                <div class="dropdown-content">
-                <a href="/home/logout">Logout</a>
-                </div>
-            </div>
-        </ul>
-    </nav>
-    
+
+
+    {% block link %}<link rel="stylesheet" href="{% static '/styles/main.css' %}">{% endblock %}
+    {% block title %}<title>billetera</title>{% endblock %}
+
+   
+    {% block nav_items %}<li class="crear"><a href={% url 'crear_billetera' %}>Crear billetera</a></li>{% endblock %}
+        
+    {% block content %}
     <div class="contenido" id="contenedor_billeteras">
         <h1 id="titulo_billeteras">Mis billeteras:</h1>
         <ul>
@@ -36,5 +21,4 @@
         {% endfor %}
         </ul>
     </div>
-</body>
-</html>
+    {% endblock %}

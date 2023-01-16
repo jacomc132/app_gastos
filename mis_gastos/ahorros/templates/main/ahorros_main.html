@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/ahorros_navbar_styles.css' %}">
+    {% block link %}{% endblock link %}
+    {% block title %}{% endblock title %}
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav_container">
+            <li class="li1"><a href="/home">Home</a></li>
+            <li class="li2"><a class="link_pagina_actual" href="/ahorros">Ahorros</a></li>
+            <li class="li3"><a href="/billetera">Billeteras</a></li>
+
+            {% block nav_items %}
+            
+            {% endblock nav_items %}
+
+
+            <div class="dropdown">
+                <button class="contenedor_user_image"><img class="user_image" src="{% static 'user_image.png' %}" alt="user_image"></button>
+                <div class="dropdown-content">
+                <a href="/home/logout">Logout</a>
+                </div>
+            </div>
+        </ul>
+    </nav>
+    
+    {% block content %}
+    
+    {% endblock content %}
+</body>
+</html>
+
