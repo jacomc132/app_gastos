@@ -11,7 +11,13 @@
 </head>
 <body id="register_body">
     {% if request.user.is_authenticated == False %}
-    
+        {% if messages %}
+            {% for message in messages %}
+            <ul class="messages_container">
+                <p class="messages">{{ message }}</p>
+            </ul>
+            {% endfor %}
+        {% endif %}
         
         <form id="formulario_register" method="POST" action="">
             <div id="contenedor_titulo_app">

@@ -138,3 +138,18 @@ a{
 a:hover{
     color:var(--color7);
 }
+
+.messages{
+    font-size:medium;
+    font-weight: 200;
+    font-family: monospace;
+    
+}
+
+.messages_container{
+    background-color:var(--color4);
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}

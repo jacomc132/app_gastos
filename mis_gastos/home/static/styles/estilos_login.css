@@ -152,8 +152,29 @@ body{
 #link_registro:hover{
     color:var(--color7);
 }
+/* Estilos para mensajes de error */
 
+.message{
+    font-size:medium;
+    font-weight: 200;
+    font-family: monospace;
+    padding-top:5%;
+    
+}
 
+.messages_container{
+    background-color:var(--color4);
+    width: 40%;
+    height: 50%;
+    border-radius: 10px;
+    display:grid;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.big_messages_container{
+    display:block;
+    
+}
 
 
 

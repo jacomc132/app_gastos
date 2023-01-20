@@ -12,11 +12,13 @@
 <body>
     {% if request.user.is_authenticated == False %}
         {% if messages %}
+            <div id="big_container_messages">
             {% for message in messages %}
-            <ul class="messages">
-                <p>{{ message }}</p>
+            <ul class="messages_container">
+                <p class="message">{{ message }}</p>
             </ul>
             {% endfor %}
+            </div>
         {% endif %}
         <form method="POST" id="formulario_login">
             {% csrf_token %}
