@@ -7,7 +7,6 @@
     --color5:black;
     --color6: whitesmoke;
     --color7: #A72AAB;
-    --title-font:font-family();
 }
 body{
     width:95vw;
@@ -32,6 +31,7 @@ body{
     border-width: 1px;
     border-color:var(--color4);
     overflow: hidden;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 /* Ubicación de elementos en el formulario */
